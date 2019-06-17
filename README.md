@@ -3,6 +3,7 @@
 Preparacion del OSCP 2019
 
 #Recursos
+<br>
 https://scund00r.com/all/oscp/2018/02/25/passing-oscp.html
 <br>
 https://www.netsecfocus.com/oscp/2019/03/29/The_Journey_to_Try_Harder-_TJNulls_Preparation_Guide_for_PWK_OSCP.html
