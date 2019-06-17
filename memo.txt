@@ -1,6 +1,19 @@
+#Nmap
+nmap -sS -sV -PN 1.1.1.1 -oN nmap-log.txt
+nmap 1.1.1.1 -p-
+nmap --script all -sV -O 1.1.1.1 -p 1-65535
+nmap 1.1.1.1 -T5 -p- -oN nmap.log
+nmap 1.1.1.1 -p 139 -sV -n -A
+nmap -p80 1.1.1.1 -oG - | nikto -h -
+nmap 1.1.1.1 -Pn -p- -sV -oN nmap.txt ## cool for ctf
+nmap -p 1-65535 -T5 -A -v -sT 1.1.1.1
+
 #Find Setuid
 find / -perm -+s
 find / \( -perm -4000 -o -perm -2000 \) -type f -exec ls -la {} \;
 find / -user root -perm -4000 -print 2>/dev/null  ##Cool , look at nmap
 find / -perm -u=s -type f 2>/dev/null
 find / -user root -perm -4000 -exec ls -ldb {} \;
+
+#WFuzz
+python wfuzz.py -c -z file,wordlist/general/big.txt --hc 404 http://192.168.1.117/Panel/FUZZ
