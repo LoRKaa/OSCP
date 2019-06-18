@@ -1,6 +1,6 @@
-<div style="text-align: center">
+<p align="center">
 <a href="https://www.offensive-security.com/information-security-certifications/oscp-offensive-security-certified-professional/"><img src="https://www.offensive-security.com/wp-content/uploads/2012/01/oscp-certs.png" title="OSCP" alt="OSCP"></a>
-</div>
+</p>
 
 # OSCP
 > Preparacion del OSCP 2019
