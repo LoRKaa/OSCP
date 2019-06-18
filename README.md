@@ -14,3 +14,13 @@ https://411hall.github.io/OSCP-Preparation/
 <br>
 https://github.com/ihack4falafel/OSCP
 <br>
+https://veteransec.com/2018/09/10/32-bit-windows-buffer-overflows-made-easy/
+<br>
+https://ired.team/offensive-security-experiments/offensive-security-cheetsheets
+<br>
+https://github.com/jivoi/pentest
+<br>
+https://github.com/frizb/Vanquish
+<br>
+https://ironhackers.es/tutoriales/preparacion-oscp-windows-buffer-overflow/
+
