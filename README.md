@@ -10,7 +10,7 @@
 <br>
 
 ## Recursos
-Hackplayers [Examen de prueba](https://www.hackplayers.com/2018/08/examen-de-prueba-para-estudiantes-del-OSCP.html)
+[Examen de prueba](https://www.hackplayers.com/2018/08/examen-de-prueba-para-estudiantes-del-OSCP.html)
 <br>
 [ihack4falafel](https://github.com/ihack4falafel/OSCP)
 <br>
