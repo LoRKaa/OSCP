@@ -1,5 +1,5 @@
 <p align="center">
-<a href="https://www.offensive-security.com/information-security-certifications/oscp-offensive-security-certified-professional/"><img src="https://www.offensive-security.com/wp-content/uploads/2012/01/oscp-certs.png" title="OSCP" alt="OSCP"></a>
+<a href="https://www.offensive-security.com/information-security-certifications/oscp-offensive-security-certified-professional/"><img src="https://www.offensive-security.com/wp-content/uploads/2015/09/Offsec-Red-Site-Logo-2015-3001.png" title="OSCP" alt="OSCP"></a>
 </p>
 
 # OSCP
