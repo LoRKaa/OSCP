@@ -6,7 +6,7 @@
 [![Downloads Stats][npm-downloads]][npm-url]
 
 ## Guias
-[scund00r][https://scund00r.com/all/oscp/2018/02/25/passing-oscp.html]
+[scund00r](https://scund00r.com/all/oscp/2018/02/25/passing-oscp.html)
 <br>
 https://scund00r.com/all/oscp/2018/02/25/passing-oscp.html
 <br>
