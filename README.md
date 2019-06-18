@@ -5,6 +5,10 @@
 # OSCP
 > Preparacion del OSCP 2019
 
+## Maquinas
+[KaliOSCP](https://images.offensive-security.com/pwk-kali-vm.7z)
+<br>
+
 ## Guias
 [scund00r](https://scund00r.com/all/oscp/2018/02/25/passing-oscp.html)
 <br>
