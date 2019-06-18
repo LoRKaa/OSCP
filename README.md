@@ -8,6 +8,8 @@
 ## Maquinas
 [KaliOSCP](https://images.offensive-security.com/pwk-kali-vm.7z)
 <br>
+[WindowsXP](https://www.makeuseof.com/tag/download-windows-xp-for-free-and-legally-straight-from-microsoft-si/)
+<br>
 
 ## Guias
 [scund00r](https://scund00r.com/all/oscp/2018/02/25/passing-oscp.html)
