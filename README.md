@@ -1,6 +1,7 @@
+<a href="https://www.offensive-security.com/information-security-certifications/oscp-offensive-security-certified-professional/"><img src="https://www.offensive-security.com/wp-content/uploads/2012/01/oscp-certs.png" title="OSCP" alt="OSCP"></a>
+
 # OSCP
 > Preparacion del OSCP 2019
-<a href="https://www.offensive-security.com/information-security-certifications/oscp-offensive-security-certified-professional/"><img src="https://www.offensive-security.com/wp-content/uploads/2012/01/oscp-certs.png" title="OSCP" alt="OSCP"></a>
 
 ## Guias
 [scund00r](https://scund00r.com/all/oscp/2018/02/25/passing-oscp.html)
