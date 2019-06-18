@@ -1,3 +1,3 @@
 git add .
-git commit -m "cool readme"
+git commit -m "updates"
 git push -u origin master
