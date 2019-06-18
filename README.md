@@ -26,4 +26,5 @@
 [Veteransec](https://veteransec.com/2018/09/10/32-bit-windows-buffer-overflows-made-easy/)
 <br>
 [ironhackers](https://ironhackers.es/tutoriales/preparacion-oscp-windows-buffer-overflow/)
-
+<br>
+Simple Buffer Overflow [parte1](https://mega.nz/#!2dMDUSAQ!Cj_7jFtjKMq0VtFpG6N9jykJZCI12JyfVum8jrpJPsE)[parte2](https://mega.nz/#!yUFzxSra!gba7t__lHtRAgjmjcuGXvfXkcZi3SRPiMo5bnLMFm9E)
