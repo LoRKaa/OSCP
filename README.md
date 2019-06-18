@@ -12,6 +12,9 @@
 <br>
 [411hall](https://411hall.github.io/OSCP-Preparation/)
 <br>
+[jpsecnetworks](https://www.jpsecnetworks.com/)
+<br>
+[AlienVault](https://www.alienvault.com/blogs/security-essentials/how-to-prepare-to-take-the-oscp)
 
 ## Recursos
 [Examen de prueba](https://www.hackplayers.com/2018/08/examen-de-prueba-para-estudiantes-del-OSCP.html)
@@ -21,6 +24,8 @@
 [Cheetsheets](https://ired.team/offensive-security-experiments/offensive-security-cheetsheets)
 <br>
 [jivoi](https://github.com/jivoi/pentest)
+<br>
+[0x4D31](https://github.com/0x4D31/awesome-oscp#oscp-reviews-and-guides)
 
 ## b0f's
 [Veteransec](https://veteransec.com/2018/09/10/32-bit-windows-buffer-overflows-made-easy/)
