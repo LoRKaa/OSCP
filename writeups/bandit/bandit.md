@@ -5,7 +5,7 @@
 
 ##### [+] use : ./Level.sh 0 # the password is bandit0
 ```
-#cat Level.sh
+# cat Level.sh
 ssh -l bandit$1 bandit.labs.overthewire.org -p 2220
 ```
 #### [+] Level0
