@@ -166,11 +166,19 @@ xLYVMN9WE5zQ5vHacb0sZEVqbrp7nBTn
 ```
 #### [+] Level17
 ```
-
+bandit17@bandit:~$ diff passwords.new passwords.old
+42c42
+< kfBf3eYk5BPBRzwjqutbbfE887SVc5Yd <<<THIS IS PASSWORD
+---
+> hlbSBPAWJmL6WFDb06gpTx1pPButblOA
 ```
 #### [+] Level18
 ```
+$ ssh -l bandit18 bandit.labs.overthewire.org -p 2220 cat readme
+This is a OverTheWire game server. More information on http://www.overthewire.org/wargames
 
+bandit18@bandit.labs.overthewire.org's password:
+IueksS7Ubh8G3DCwVzrTd8rAVOwq3M5x
 ```
 #### [+] Level19
 ```
