@@ -182,7 +182,8 @@ IueksS7Ubh8G3DCwVzrTd8rAVOwq3M5x
 ```
 #### [+] Level19
 ```
-
+bandit19@bandit:~$ ./bandit20-do cat /etc/bandit_pass/bandit20
+GbKksEFF4yrVs6il55v6gwY5aVje5f0j
 ```
 #### [+] Level20
 ```
