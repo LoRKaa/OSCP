@@ -3,12 +3,12 @@
 ![bandit](https://cdn-images-1.medium.com/max/1600/1*VLXFzVtGx16B1iH81bcTPw.png)
 #### The Bandit wargame is aimed at absolute beginners. It will teach the basics needed to be able to play other wargames.
 
-## [+] use : ./level 1
+### [+] use : ./level.sh 1
 ```
 #cat level.sh
 ssh -l bandit$1 bandit.labs.overthewire.org -p 2220
 ```
-####Level0
+##Level0
 ```
 bandit0@bandit:~$ cat readme
 boJ9jbbUNNfktd78OOpsqOltutMc3MY1
