@@ -1,7 +1,7 @@
 # Bandit Writeup
 
 ![bandit](https://cdn-images-1.medium.com/max/1600/1*VLXFzVtGx16B1iH81bcTPw.png)
-#### The Bandit wargame is aimed at absolute beginners. It will teach the basics needed to be able to play other wargames.
+#### The Bandit wargame is aimed at absolute beginners. It will teach the basics needed to be able to play other wargames.[go to website](http://overthewire.org/wargames/bandit/)
 
 ##### [+] use : ./[+] Level.sh 0 # the password is bandit0
 ```
