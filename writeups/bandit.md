@@ -160,6 +160,9 @@ ECDSA key fingerprint is SHA256:98UL0ZWr85496EtCRkKlo20X3OPnyPSB5tB5RPbhczc.
 Are you sure you want to continue connecting (yes/no)? yes
 Failed to add the host to the list of known hosts (/home/bandit16/.ssh/known_hosts).
 This is a OverTheWire game server. More information on http://www.overthewire.org/wargames
+
+bandit17@bandit:~$ cat /etc/bandit_pass/bandit17
+xLYVMN9WE5zQ5vHacb0sZEVqbrp7nBTn
 ```
 #### [+] Level17
 ```
