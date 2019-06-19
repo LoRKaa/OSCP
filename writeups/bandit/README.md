@@ -3,9 +3,9 @@
 ![bandit](https://cdn-images-1.medium.com/max/1600/1*VLXFzVtGx16B1iH81bcTPw.png)
 #### The Bandit wargame is aimed at absolute beginners. It will teach the basics needed to be able to play other wargames. [Play Bandit Wargame](http://overthewire.org/wargames/bandit/ )
 
-##### [+] use : ./Level.sh 0 # the password is bandit0
+##### [+] use : ./levelbandit.sh 0 # the password is bandit0
 ```
-$ cat Level.sh
+$ cat levelbandit.sh
 ssh -l bandit$1 bandit.labs.overthewire.org -p 2220
 ```
 #### [+] Level0
