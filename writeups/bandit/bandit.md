@@ -188,7 +188,8 @@ GbKksEFF4yrVs6il55v6gwY5aVje5f0j
 #### [+] Level20
 ![level20](level20.png)
 ```
-
+bandit21@bandit:~$ cat /etc/bandit_pass/bandit21
+gE269g2h3mw3pwgrj0Ha9Uoqen1c9DGr
 ```
 #### [+] Level21
 ```
