@@ -150,7 +150,7 @@ vBgsyi/sN3RqRBcGU40fOoZyfAMT8s1m/uYv52O6IgeuZ/ujbjY=
 
 closed
 ```
-create file with key in /tmp
+[+] create file with key in /tmp
 ```
 bandit16@bandit:~$ chmod 400 /tmp/tuki/lala
 bandit16@bandit:~$ ssh -i /tmp/tuki/lala bandit17@localhost
