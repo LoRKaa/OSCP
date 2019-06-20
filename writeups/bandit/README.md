@@ -273,32 +273,60 @@ bandit26@bandit:~$ ./bandit27-do cat /etc/bandit_pass/bandit27
 ```
 #### [+] Level27
 ```
+bandit27@bandit:/tmp/lorka27$ git clone ssh://bandit27-git@localhost/home/bandit27-git/repo
+Cloning into 'repo'...
+Could not create directory '/home/bandit27/.ssh'.
+The authenticity of host 'localhost (127.0.0.1)' can't be established.
+ECDSA key fingerprint is SHA256:98UL0ZWr85496EtCRkKlo20X3OPnyPSB5tB5RPbhczc.
+Are you sure you want to continue connecting (yes/no)? yes
+Failed to add the host to the list of known hosts (/home/bandit27/.ssh/known_hosts).
+This is a OverTheWire game server. More information on http://www.overthewire.org/wargames
 
+bandit27-git@localhost's password:
+remote: Counting objects: 3, done.
+remote: Compressing objects: 100% (2/2), done.
+remote: Total 3 (delta 0), reused 0 (delta 0)
+Receiving objects: 100% (3/3), done.
+bandit27@bandit:/tmp/lorka27$ ls
+repo
+bandit27@bandit:/tmp/lorka27$ cd repo/
+bandit27@bandit:/tmp/lorka27/repo$ ls
+README
+bandit27@bandit:/tmp/lorka27/repo$ cat README
+The password to the next level is: 0ef186ac70e04ea33b4c1853d2526fa2
 ```
 #### [+] Level28
 ```
+bandit28@bandit:/tmp/lorka28/repo$ git log
+commit 073c27c130e6ee407e12faad1dd3848a110c4f95
+Author: Morla Porla <morla@overthewire.org>
+Date:   Tue Oct 16 14:00:39 2018 +0200
 
-```
-#### [+] Level29
-```
+    fix info leak
 
-```
-#### [+] Level30
-```
+commit 186a1038cc54d1358d42d468cdc8e3cc28a93fcb
+Author: Morla Porla <morla@overthewire.org>
+Date:   Tue Oct 16 14:00:39 2018 +0200
 
-```
-#### [+] Level31
-```
+    add missing data
 
-```
-#### [+] Level32
-```
+commit b67405defc6ef44210c53345fc953e6a21338cc7
+Author: Ben Dover <noone@overthewire.org>
+Date:   Tue Oct 16 14:00:39 2018 +0200
 
-```
-#### [+] Level33
-```
+    initial commit of README.md
+bandit28@bandit:/tmp/lorka28/repo$ git diff 073c27c130e6ee407e12faad1dd3848a110c4f95 186a1038cc54d1358d42d468cdc8e3cc28a93fcb
+diff --git a/README.md b/README.md
+index 5c6457b..3f7cee8 100644
+--- a/README.md
++++ b/README.md
+@@ -4,5 +4,5 @@ Some notes for level29 of bandit.
+ ## credentials
 
-```
-#### [+] Level34
+ - username: bandit29
+-- password: xxxxxxxxxx
++- password: bbc96594b4e001778eee9975372716b2
+
+bandit28@bandit:/tmp/lorka28/repo$
 ```
 
