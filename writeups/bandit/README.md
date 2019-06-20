@@ -251,7 +251,11 @@ UoMYTrfrBFHyQXmg6gzctqAwOmw1IohZ
 ```
 #### [+] Level24
 ```
-bandit24@bandit:~$ for i in {1000..9999};do echo $i;echo -e 'UoMYTrfrBFHyQXmg6gzctqAwOmw1IohZ $i' | timeout 0.6 nc localhost 30002 |grep -vi wrong|grep -v pincode;done
+bandit24@bandit:/tmp/fififi$ for i in {8529..8531}; do echo $i;echo UoMYTrfrBFHyQXmg6gzctqAwOmw1IohZ $i | timeout 0.6 nc localhost 1 30002 |grep -vi wrong|grep -v pincode;done
+
+8530
+Correct!
+The password of user bandit25 is uNG9O58gUE7snukf3bvZ0rxhtnjzSGzG
 ```
 #### [+] Level25
 ```
