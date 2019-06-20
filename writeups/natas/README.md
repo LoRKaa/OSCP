@@ -3,16 +3,11 @@
 ![natas](logo.png)
 #### Natas teaches the basics of serverside web-security.. [Play Natas Wargame](https://overthewire.org/wargames/natas/ )
 
-##### [+] use : ./levelbandit.sh 0 # the password is bandit0
+#### [+] Level0
 ![natas](level0.gif)
 ```
 gtVrDuiDfck831PqWsLEZy5gyDz1clto
 ```
-#### [+] Level0
-```
-
-```
- 
 #### [+] Level01
 ```
 
