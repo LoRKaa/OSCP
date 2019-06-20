@@ -258,8 +258,9 @@ Correct!
 The password of user bandit25 is uNG9O58gUE7snukf3bvZ0rxhtnjzSGzG
 ```
 #### [+] Level25
-[![asciicast](https://asciinema.org/a/14.png)](level25.cast)
+[![asciicast](https://asciinema.org/a/ia4j03MudaVuZcrBgaJQXe1wu.svg)](https://asciinema.org/a/ia4j03MudaVuZcrBgaJQXe1wu)
 ```
+5czgV9L3Xx8JPOyRbXh6lQbmIOWvPT6Z
 ```
 #### [+] Level26
 ```
