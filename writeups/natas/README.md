@@ -9,8 +9,9 @@
 gtVrDuiDfck831PqWsLEZy5gyDz1clto
 ```
 #### [+] Level01
+![natas](level0.gif)
 ```
-
+ZluruAthQk7Q2MqmDeTiUij2ZvWy2mBi
 ```
 #### [+] Level02
 ```
