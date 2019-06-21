@@ -44,8 +44,9 @@ aGoY4q2Dc6MgDq4oL4YtoKtyAg9PeHa1
 DBfUBfqQG69KvJvJ1iAbMoIpwSNQ9bWe
 ```
 #### [+] Level08
+![natas](level8.gif)
 ```
-
+W0mMhUcRRnG8dcghE4qvk3JA9lGt8nDl
 ```
 #### [+] Level09
 ```
