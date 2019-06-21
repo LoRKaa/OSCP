@@ -34,8 +34,9 @@ iX6IOfmpN7AYOQGPwtn3fXpbaJVJcHfq
 aGoY4q2Dc6MgDq4oL4YtoKtyAg9PeHa1
 ```
 #### [+] Level06
+![natas](level6.gif)
 ```
-
+7z3hEENjQtflzgnT29q7wAvMNfZdh0i9
 ```
 #### [+] Level07
 ```
