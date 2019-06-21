@@ -58,8 +58,11 @@ W0mMhUcRRnG8dcghE4qvk3JA9lGt8nDl
 nOpp1igQAkUzaI1GUUjzn1bFVj7xCNzu
 ```
 #### [+] Level10
+![natas](level10.gif)
 ```
+. natas /etc/natas_webpass/*
 
+U82q5TCMMQ9xuFoI3dYX61s7OZD9JKoK
 ```
 #### [+] Level11
 ```
