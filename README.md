@@ -47,3 +47,4 @@ Stack Overflow en Español [parte1](https://youtu.be/7KZ5LCFr6Sw) [parte2](https
 ## Windows
 [fuzzysec](https://www.fuzzysecurity.com/tutorials/16.html)
 <br>
+[nishang](https://github.com/samratashok/nishang/blob/master/README.md)
