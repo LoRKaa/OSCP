@@ -24,6 +24,10 @@
 
 ## Tools
 [sshuttle - Tunel SSH que funciona como una VPN](https://github.com/sshuttle/sshuttle)
+<br>
+[SecLists](https://github.com/danielmiessler/SecLists)
+<br>
+[Static Tools](https://github.com/ZephrFish/static-tools)
 
 ## Recursos
 [Examen de prueba](https://www.hackplayers.com/2018/08/examen-de-prueba-para-estudiantes-del-OSCP.html)
@@ -37,6 +41,10 @@
 [0x4D31](https://github.com/0x4D31/awesome-oscp#oscp-reviews-and-guides)
 <br>
 [s4vitar](https://gist.github.com/s4vitar/b88fefd5d9fbbdcc5f30729f7e06826e)
+<br>
+[Exploit Exercises](https://github.com/FFY00/exploit-exercises)
+<br>
+[IppSec Videos - HTB retired machines](https://www.youtube.com/channel/UCa6eh7gCkpPo5XXUDfygQQA/videos)
 
 ## b0f's
 [Veteransec](https://veteransec.com/2018/09/10/32-bit-windows-buffer-overflows-made-easy/)
