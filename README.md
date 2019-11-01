@@ -25,9 +25,11 @@
 ## Tools
 [sshuttle - Tunel SSH que funciona como una VPN](https://github.com/sshuttle/sshuttle)
 <br>
-[SecLists - Wordlist for bruteforce](https://github.com/danielmiessler/SecLists)
+[SecLists - Wordlist](https://github.com/danielmiessler/SecLists)
 <br>
 [Static Tools - Binary ncat,nmap,etc..](https://github.com/ZephrFish/static-tools)
+<br>
+[OBS - Screen Video Recorder Software](https://obsproject.com/)
 
 ## Recursos
 [Examen de prueba](https://www.hackplayers.com/2018/08/examen-de-prueba-para-estudiantes-del-OSCP.html)
