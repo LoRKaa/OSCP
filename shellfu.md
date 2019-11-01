@@ -3,7 +3,7 @@
 ### NMAP
 
 ```
-nmap -sS -sV -PN ip -oN nmap-log.txt
+nmap -sS -sV -PN 10.10.10.10 -oN nmap-log.txt
 nmap 192.168.1.113 -p-
 nmap --script all -sV -O 5.34.149.3 -p 1-65535
 nmap 192.168.1.136 -T5 -p- -oN nmap.log
