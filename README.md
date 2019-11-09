@@ -21,6 +21,8 @@
 [jpsecnetworks](https://www.jpsecnetworks.com/)
 <br>
 [AlienVault](https://www.alienvault.com/blogs/security-essentials/how-to-prepare-to-take-the-oscp)
+<br> 
+[OSCP BIBLE](https://github.com/mohitkhemchandani/OSCP_BIBLE)
 
 ## Tools
 [sshuttle - Tunel SSH que funciona como una VPN](https://github.com/sshuttle/sshuttle)
