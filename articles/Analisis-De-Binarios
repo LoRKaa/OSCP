@@ -1,0 +1,281 @@
+ Análisis de binarios
+
+En ocasiones, frecuentemente después de un ataque, quizás durante un análisis forense, podemos encontrar misteriosos binarios en la máquina. Programas que pueden haber sido dejados por el atacante, asi como herramientas que ha utilizado o incluso binarios del sistema troyanizados.
+
+Pueden utilizarse diversas técnicas para obtener pistas sobre lo que hace ese binario, pero lo que si esta claro que no hay que hacer, es ejecutarlo. Quién sabe que podría hacer con nuestro sistema: borrar todas rastro del ataque, destruir ficheros, o ...
+
+Es posible que tengamos suficiente consultando Internet para averiguar que programa es. Aunque esto no siempre es suficiente, ya que econtraremos
+programas con nombres poco identificativos o programados por el mismo intruso.
+
+En este post se describe brevemente como utilizar algunas herramientas de Linux para descubrir que hace un programa del que no disponemos de codigo fuente.
+
+Qué tipo de fichero es?
+
+Para obtener información del tipo de fichero, en Unix disponemos de la herramienta file. Veamos un ejemplo de su uso con dos programas desconocidos;
+a.out y b.out:
+
+
+$ file a.out
+a.out: ELF 32-bit LSB executable, Intel 80386, version 1 (SYSV), for GNU/Linux
+2.2.5, dynamically linked (uses shared libs), not stripped
+
+# file b.out
+b.out: ELF 32-bit LSB executable, Intel 80386, version 1 (SYSV), for GNU/Linux
+2.2.5, statically linked, not stripped
+
+Podemos observar una diferencia importante entre los dos programas analizados. a.out esta enlazado dinámicamente y b.out esta enlazado estáticamente. Por defecto, en compiladores como gcc, se enlaza dinámicamente. Medinate el flag -static podemos compilar un ejecutable estático, y hacer de esta manera que no dependa de librerías externas.
+
+Los binarios estáticos son mucho mas grandes que los dinámicos, ya que el ejecutable final dispone de todas las librerías necesarias. Estos serán más difíciles de analizar, debido a la gran cantidad de informacion que pueden contener.
+
+
+Ejemplo de compilacion dinamica:
+$ gcc src.c -o a.out
+
+Ejemplo de compilacion estatica:
+$ gcc -static src.c -o b.out
+
+Resultado:
+$ ls -lh
+-rwxr-xr-x  1 dlerch dlerch 5,5K nov  8 12:21 a.out
+-rwxr-xr-x  1 dlerch dlerch 405K nov  8 12:21 b.out
+-rw-r--r--  1 dlerch dlerch 1,5K nov  8 12:10 src.c
+
+
+Otra información importante que ofrece el comando 'file' es si el binario es 'striped' o 'no striped'. Si el binario es 'striped' esto significará; que el programador ha eliminado los símbolos del fichero objeto. Simbolos que genera el compilador y que nos ayudarían enormemente en nuestra búsqueda de la funcionalidad del mismo.
+
+Estos simbolos pueden eliminarse con el comando 'strip':
+
+$ ls -lh a.out
+-rwxr-xr-x  1 root root 5,5K nov  8 12:30 a.out
+$ strip a.out
+$ ls -lh a.out
+-rwxr-xr-x  1 root root 3,6K nov  8 12:31 a.out
+
+En el siguiente apartado se explica el uso del comando 'nm', el principal afectado del uso de 'strip'.
+
+Analisis de los símbolos del fichero objeto.
+
+El comando 'nm' sirve para listar los símbolos del código objeto. Por este motivo si el binario no dispone de símbolo debido a que se ha aplicado sobre el el comando 'strip', 'nm' no nos servira de nada.
+
+$ strip a.out
+$ nm a.out
+nm: a.out: no hay simbolos
+
+
+En caso de que el binario disponga de los símbolos el resultado puede darnos algunas indicaciones. Si además, el binario ha sido compilado para ofrecer información de depuración (flag -g, poco probable), todavía dispondremos de más información.
+
+
+$ nm -a a.out
+
+[Se ha suprimido parte de informacion, para abreviar]
+
+080497f8 A __bss_start
+08048454 t call_gmon_start
+080497f8 b completed.1
+00000000 a crtstuff.c
+00000000 a crtstuff.c
+080496e0 d __CTOR_END__
+080496dc d __CTOR_LIST__
+080497ec D __data_start
+080497ec W data_start
+0804866c t __do_global_ctors_aux
+08048478 t __do_global_dtors_aux
+080497f0 D __dso_handle
+080496e8 d __DTOR_END__
+080496e4 d __DTOR_LIST__
+080496f0 D _DYNAMIC
+080497f8 A _edata
+080497fc A _end
+      U exit@@GLIBC_2.0
+08048690 T _fini
+080496dc A __fini_array_end
+080496dc A __fini_array_start
+080486ac R _fp_hw
+080484b4 t frame_dummy
+080486d8 r __FRAME_END__
+080497bc D _GLOBAL_OFFSET_TABLE_
+      w __gmon_start__
+      U htons@@GLIBC_2.0
+      U inet_ntoa@@GLIBC_2.0
+08048378 T _init
+080496dc A __init_array_end
+080496dc A __init_array_start
+080486b0 R _IO_stdin_used
+080496ec d __JCR_END__
+080496ec d __JCR_LIST__
+      w _Jv_RegisterClasses
+08048628 T __libc_csu_fini
+080485e0 T __libc_csu_init
+      U __libc_start_main@@GLIBC_2.0
+080484e0 T main
+      U ntohs@@GLIBC_2.0
+080497f4 d p.0
+      U perror@@GLIBC_2.0
+080496dc A __preinit_array_end
+080496dc A __preinit_array_start
+      U printf@@GLIBC_2.0
+      U read@@GLIBC_2.0
+      U socket@@GLIBC_2.0
+00000000 a src.c
+08048430 T _start
+
+
+Como podemos observar en la salida del comando anterior, se utilizan ciertas llamadas a la librería de C como: exit, htons, inet_ntoa, ntohs, perror, printf, read o socket. Es especialmente interesante el hecho de que existen algunas funciones de red como socket(). Sin duda este programa dispone de alguna funcionalidad de red. Sigamos investigando.
+
+Obtener cadenas de texto.
+
+Existe un comando que nos permite obtener las cadenas de texto que se mantienen en el fichero ejecutable. Esto nos permite obtener cierta informacion de forma rapida y sencilla. Este comando es 'strings':
+
+$ strings a.out
+/lib/ld-linux.so.2
+_Jv_RegisterClasses
+__gmon_start__
+libc.so.6
+printf
+perror
+socket
+read
+ntohs
+inet_ntoa
+htons
+exit
+_IO_stdin_used
+__libc_start_main
+GLIBC_2.0
+PTRh(
+socket()
+src: %s:%d              dst: %s:%d
+
+
+Al parecer no hay mucha información que no nos haya proporcionado ya el comando 'nm', aunque sin duda, parte de esta información la ofrece 'strings' de una forma mas legible.
+
+Adicionalmente al comando anterior obtenemos la cadena:
+
+
+src: %s:%d              dst: %s:%d
+
+
+El objetivo de este programa salta a la vista ...
+
+Analisis dinámico
+
+
+Una vez estamos mas o menos seguros de que el programa no dañaría nuestro sistema en caso de ser ejecutado, podemos realizar un análisis dinámico. Este pasa por ejecutar el programa.
+
+Disponemos de dos programas muy interesantes para hacer esto: strace y ltrace. El primero nos informa de las llamadas al sistema que efectúa el
+programa, mientras que el segundo informa de las librerías a las que
+llama.
+
+Veamos una ejecucion del primero:
+
+
+$ strace -o strace.out ./a.out
+src: 192.168.0.3:8449          dst: 192.168.0.3:7
+src: 192.168.0.3:8450          dst: 192.168.0.3:7
+src: 192.168.0.3:8451          dst: 192.168.0.3:7
+src: 192.168.0.3:8452          dst: 192.168.0.3:7
+src: 192.168.0.3:8453          dst: 192.168.0.3:7
+...
+[ Finalizamos con Contrl+C ]
+
+$ cat strace.out
+execve("./a.out", ["./a.out"], [/* 37 vars */]) = 0
+uname({sys="Linux", node="hackerbox", ...}) = 0
+brk(0)                                  = 0x804a000
+open("/etc/ld.so.preload", O_RDONLY)    = -1 ENOENT (No such file or
+directory)
+open("/etc/ld.so.cache", O_RDONLY)      = 3
+fstat64(3, {st_mode=S_IFREG|0644, st_size=131688, ...}) = 0
+old_mmap(NULL, 131688, PROT_READ, MAP_PRIVATE, 3, 0) = 0xf6fdf000
+close(3)                                = 0
+open("/lib/tls/libc.so.6", O_RDONLY)    = 3
+read(3, "\177ELF\1\1\1\0\0\0\0\0\0\0\0\0\3\0\3\0\1\0\0\0\300\313"..., 512) =
+512fstat64(3, {st_mode=S_IFREG|0755, st_size=1455084, ...}) = 0
+old_mmap(0xaa8000, 1158124, PROT_READ|PROT_EXEC, MAP_PRIVATE, 3, 0) = 0xaa8000
+old_mmap(0xbbd000, 16384, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_FIXED, 3,
+0x115000) = 0xbbd000
+old_mmap(0xbc1000, 7148, PROT_READ|PROT_WRITE,
+MAP_PRIVATE|MAP_FIXED|MAP_ANONYMOUS, -1, 0) = 0xbc1000
+close(3)                                = 0
+old_mmap(NULL, 4096, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_ANONYMOUS, -1, 0) =
+0xf6fde000
+mprotect(0xbbd000, 8192, PROT_READ)     = 0
+mprotect(0xaa0000, 4096, PROT_READ)     = 0
+set_thread_area({entry_number:-1 -> 6, base_addr:0xf6fde300, limit:1048575,
+seg_32bit:1, contents:0, read_exec_only:0, limit_in_pages:1,
+seg_not_present:0, useable:1}) = 0
+munmap(0xf6fdf000, 131688)              = 0
+socket(PF_INET, SOCK_PACKET, 0x300 /* IPPROTO_??? */) = 3
+read(3, "\1\0^\0\0\22\0\0^\0\1\1\10\0E\20\0008\337\310@\0\377p\254"..., 54) =
+54fstat64(1, {st_mode=S_IFCHR|0620, st_rdev=makedev(136, 3), ...}) = 0
+mmap2(NULL, 4096, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_ANONYMOUS, -1, 0) =
+0xf6fff000
+write(1, "src: 192.168.0.3:8449\t\tdst: 192"..., 45) = 45
+read(3, "\1\0^\0\0\22\0\0^\0\1\2\10\0E\20\0008\207\324@\0\377p\4"..., 54) = 54
+write(1, "src: 192.168.0.3:8450\t\tdst: 192"..., 45) = 45
+read(3, "\1\0^\0\0\22\0\0^\0\1\3\10\0E\20\0008\312\334@\0\377p\301"..., 54) =
+54write(1, "src: 192.168.0.3:8451\t\tdst: 192"..., 45) = 45
+read(3, "\1\0^\0\0\22\0\0^\0\1\4\10\0E\20\0008\302\214@\0\377p\311"..., 54) =
+54write(1, "src: 192.168.0.3:8452\t\tdst: 192"..., 45) = 45
+read(3, "\1\0^\0\0\22\0\0^\0\1\5\10\0E\20\0008\213\370@\0\377p\0"..., 54) = 54
+write(1, "src: 192.168.0.3:8453\t\tdst: 192"..., 45) = 45
+read(3, "\0\4u\201\335L\0\260\320\276Z\271\10\0E\0\0004\36\370@"..., 54) = 54
+--- SIGINT (Interrupt) @ 0 (0) ---
++++ killed by SIGINT +++
+
+
+Y con ltrace:
+
+
+$ ltrace -o ltrace.out ./a.out
+src: 192.168.0.2:22            dst: 192.168.0.2:57378
+src: 192.168.0.1:57378                dst: 192.168.0.1:22
+src: 192.168.0.2:22            dst: 192.168.0.2:57378
+src: 192.168.0.1:57378                dst: 192.168.0.1:22
+src: 192.168.0.1:57378                dst: 192.168.0.1:22
+...
+[ Finalizamos con Contrl+C. Podemos ver la captura ]
+
+$ cat ltrace.out
+__libc_start_main(0x80484e0, 1, 0xfefff734, 0x80485e0, 0x8048628 
+
+htons(3, 0, 0, 0, 0)                             = 768
+socket(2, 10, 768)                               = 3
+read(3, "", 54)                                  = 54
+ntohs(5632)                                      = 22
+inet_ntoa(0xfd92550)                             = "192.168.0.2"
+ntohs(8928)                                      = 57378
+inet_ntoa(0x214ea8c0)                            = "192.168.0.1"
+printf("src: %s:%d\t\tdst: %s:%d \n", "192.168.0.1", 57378, "192.168.0.1",
+22) = 49
+read(3, "", 54)                                  = 54
+ntohs(5632)                                      = 22
+inet_ntoa(0xfd92550)                             = "192.168.0.2"
+ntohs(8928)                                      = 57378
+inet_ntoa(0x214ea8c0)                            = "192.168.0.1"
+printf("src: %s:%d\t\tdst: %s:%d \n", "192.168.0.1", 57378, "192.168.0.1",
+22) = 49
+read(3, "", 54)                                  = 54
+ntohs(5632)                                      = 22
+inet_ntoa(0xfd92550)                             = "192.168.0.2"
+ntohs(8928)                                      = 57378
+inet_ntoa(0x214ea8c0)                            = "192.168.0.1"
+printf("src: %s:%d\t\tdst: %s:%d \n", "192.168.0.1", 57378, "192.168.0.1",
+22) = 49
+read(3, "", 54)                                  = 54
+ntohs(8928)                                      = 57378
+inet_ntoa(0x214ea8c0)                            = "192.168.0.1"
+ntohs(5632)                                      = 22
+inet_ntoa(0xfd92550)                             = "192.168.0.2"
+printf("src: %s:%d\t\tdst: %s:%d \n", "192.168.0.2", 22, "192.168.0.2",
+57378) = 47
+read(3, "", 54)                                  = 54
+ntohs(5632)                                      = 22
+inet_ntoa(0xfd92550)                             = "192.168.0.2"
+ntohs(8928)                                      = 57378
+inet_ntoa(0x214ea8c0)                            = "192.168.0.1"
+printf("src: %s:%d\t\tdst: %s:%d \n", "192.168.0.1", 57378, "192.168.0.1",
+22) = 49
+22 
+--- SIGINT (Interrupt) ---
++++ killed by SIGINT +++

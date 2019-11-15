@@ -1,0 +1,1037 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN">
+<HTML
+><HEAD
+><TITLE
+>Guía breve Tripwire</TITLE
+><META
+NAME="GENERATOR"
+CONTENT="Modular DocBook HTML Stylesheet Version 1.74b"></HEAD
+><BODY
+CLASS="ARTICLE"
+BGCOLOR="#FFFFFF"
+TEXT="#000000"
+LINK="#0000FF"
+VLINK="#840084"
+ALINK="#0000FF"
+><DIV
+CLASS="ARTICLE"
+><DIV
+CLASS="TITLEPAGE"
+><H1
+CLASS="TITLE"
+><A
+NAME="AEN2"
+>Guía breve Tripwire</A
+></H1
+><DIV
+><TABLE
+BORDER="0"
+BGCOLOR="#E0E0E0"
+WIDTH="50%"
+CELLSPACING="0"
+CELLPADDING="0"
+ALIGN="CENTER"
+><TR
+><TD
+VALIGN="TOP"
+><B
+>Abstract</B
+></TD
+></TR
+><TR
+><TD
+VALIGN="TOP"
+><P
+>         Esta es una guía breve para utilizar Tripwire en Linux.
+         Se desarrolló en ambiente RedHat 7.1; sin embargo, debe ser
+         útil en cualquier otro OS compatible.
+         </P
+></TD
+></TR
+></TABLE
+></DIV
+><HR
+WIDTH="75%"
+ALIGN="CENTER"
+COLOR="#000000"
+SIZE="1"></DIV
+><DIV
+CLASS="TOC"
+><DL
+><DT
+><B
+>Tabla de contenidos</B
+></DT
+><DT
+><A
+HREF="#INTRO"
+>Introducción</A
+></DT
+><DT
+><A
+HREF="#AEN39"
+>Configuración de Tripwire</A
+></DT
+><DT
+><A
+HREF="#AEN82"
+>Configuración permanente de Tripwire</A
+></DT
+><DT
+><A
+HREF="#AEN116"
+>Eliminación de archivos de texto</A
+></DT
+><DT
+><A
+HREF="#AEN127"
+>Script check_twpol.sh</A
+></DT
+></DL
+></DIV
+><DIV
+CLASS="SECT1"
+><H1
+CLASS="SECT1"
+><A
+NAME="INTRO"
+>Introducción</A
+></H1
+><DIV
+CLASS="SECT2"
+><H2
+CLASS="SECT2"
+><A
+NAME="AEN23"
+>¿Por qué usar Tripwire?</A
+></H2
+><P
+>	Para mejorar la seguridad de su sistema.
+	</P
+><P
+>	No existen los sistemas computacionales perfectos
+	e invulnerables que desearíamos, y siempre estaremos
+	expuestos a ataques. Más allá de todas las medidas preventivas
+	que tomemos (firewalls, patches, políticas, etc.) siempre
+	cabe la posibilidad de ser alcanzados por un hacker. Los
+	ataques exitosos a través de la red típicamente involucran
+	la modificación parcial del sistema mediante la alteración
+	o reemplazo de ciertos archivos, lo cual suele ser empleado
+	por el atacante para posteriormente tomar el control total
+	del sistema.
+	</P
+><P
+>Tripwire asume que todos los controles de seguridad
+	han fallado, y que nuestro sistema ya ha sido alterado;
+	al menos, parcialmente. Sin embargo, parte del arte de
+	los atacantes consiste en no ser descubiertos, y para esto
+	emplean diversas técnicas relativamente sofisticadas. Tripwire
+	servirá para alertar al administrador de estos cambios
+	(los cuales de otro modo podrían pasar desapercibidos
+	por semanas o meses) a fin de tomar acciones con rapidez.
+	</P
+><P
+>Para esto, Tripwire monitorea rutinariamente
+	la integridad de una gran cantidad de archivos que
+	tienden a ser blanco de los atacantes. Sin embargo, este
+	proceso es pesado, y se suele ejecutar a intervalos;
+	por ejemplo, diarios o interdiarios, aunque no hay
+	ninguna restricción (salvo de recursos) para
+	no lanzarlo cada media hora.
+	</P
+></DIV
+><DIV
+CLASS="SECT2"
+><HR><H2
+CLASS="SECT2"
+><A
+NAME="AEN29"
+>Instalar Tripwire</A
+></H2
+><P
+>	Descargue la versión open source de Tripwire del site
+	<A
+HREF="http://www.tripwire.org"
+TARGET="_top"
+>	www.tripwire.org</A
+>. Elija la versión que corresponda
+	mejor a su sistema operativo.
+	</P
+><P
+>	Tripwire normalmente se distribuye en un archivo RPM que viene empacado
+	en formato TAR comprimido. En este último caso, usar:
+<TABLE
+BORDER="0"
+BGCOLOR="#E0E0E0"
+WIDTH="100%"
+><TR
+><TD
+><PRE
+CLASS="SCREEN"
+># tar xvzf tripwire.tar.gz</PRE
+></TD
+></TR
+></TABLE
+>
+	Lo cual debería generar el archivo 
+	<TT
+CLASS="FILENAME"
+>tripwire-2.3-47.i386.rpm</TT
+> (el nombre
+	exacto dependerá de su versión.)
+	</P
+><P
+>	Ahora instálelo:
+<TABLE
+BORDER="0"
+BGCOLOR="#E0E0E0"
+WIDTH="100%"
+><TR
+><TD
+><PRE
+CLASS="SCREEN"
+># rpm -ivh tripwire-2.3-47.i386.rpm</PRE
+></TD
+></TR
+></TABLE
+>
+	</P
+><P
+>	Nota: En diversas distribuciones de Linux, incluyendo
+	RedHat 7.2 y superiores, Tripwire ya está instalado,
+	razón por la cual este paso puede no ser necesario.
+	</P
+></DIV
+></DIV
+><DIV
+CLASS="SECT1"
+><HR><H1
+CLASS="SECT1"
+><A
+NAME="AEN39"
+>Configuración de Tripwire</A
+></H1
+><DIV
+CLASS="SECT2"
+><H2
+CLASS="SECT2"
+><A
+NAME="AEN41"
+>Definir las claves de Tripwire</A
+></H2
+><P
+>	Tripwire utiliza dos claves (que pueden ser palabras u oraciones)
+	para almacenar su información. Una de ellas, la "site key" o
+	"clave del site", se emplea para encriptar los archivos de
+	configuración y de las políticas. La otra - la "local key" o
+	"clave local", se usa para encriptar la información referida
+	al estado de los archivos del sistema que se monitorean.
+	</P
+><P
+>	Ud. necesita estas dos claves para las tareas de administración
+	de Tripwire. Estas se deben introducir tan pronto como se
+	ha instalado Tripwire mediante el comando:
+<TABLE
+BORDER="0"
+BGCOLOR="#E0E0E0"
+WIDTH="100%"
+><TR
+><TD
+><PRE
+CLASS="SCREEN"
+># /etc/tripwire/twinstall.sh</PRE
+></TD
+></TR
+></TABLE
+>
+	Recuérdelas bien, o anótelas en un lugar seguro.
+        </P
+></DIV
+><DIV
+CLASS="SECT2"
+><HR><H2
+CLASS="SECT2"
+><A
+NAME="AEN46"
+>Configurar el archivo de políticas</A
+></H2
+><P
+>	La configuración de los archivos que van a ser
+	monitoreados por Tripwire se mantiene en un gran archivo
+	conocido como "archivo de políticas" (policy file.) Su
+	manipulación es algo tediosa dada su extensión. Tripwire
+	viene con un archivo que sirve de "plantilla" para ser
+	modificado. Este archivo es:	
+	<TT
+CLASS="FILENAME"
+>/etc/tripwire/twpol.txt</TT
+>.
+        </P
+><P
+>	Ud. puede modificarlo directamente con un editor de
+	texto (aunque le aconsejo que guarde una copia sin
+	modificar del mismo.)
+	</P
+><P
+>	Ahora haremos una observación de órden práctico y
+	didáctico: Tripwire por lo general toma varios minutos
+	en cada una de sus ejecuciones, y si Ud. nunca lo ha
+	usado, probablemente le resultará desesperante aguardar
+	mucho tiempo sin saber si las cosas están yendo bien o
+	mal. Por este motivo yo sugiero que empecemos con una
+	versión reducida (y casi inútil) del archivo de políticas.
+	Una vez que Ud. comprenda el proceso completo, podrá
+	retomar el archivo original y aprovecharlo.
+	</P
+><P
+>	Nuevamente va la advertencia: haga una copia de
+	seguridad del archivo <TT
+CLASS="FILENAME"
+>twpol.txt</TT
+>.
+	</P
+><P
+>	Para recortar el archivo proporcionado, simplemente
+	use un editor de texto (como vi) y busque la sección
+	"File System and Disk Administraton Programs" (que en
+	el archivo que yo tengo, se ubica a partir de la línea
+	185.) Un extracto de esa sección es presentado aquí:
+
+<TABLE
+BORDER="0"
+BGCOLOR="#E0E0E0"
+WIDTH="100%"
+><TR
+><TD
+><PRE
+CLASS="SCREEN"
+>...
+################################################ #
+# File System and Disk Administration Programs # #
+################################################
+(
+  rulename = "File System and Disk Administraton Programs",
+  severity = $(SIG_HI)
+)
+{
+  /sbin/accton                         -&#62; $(SEC_CRIT) ;
+  /sbin/badblocks                      -&#62; $(SEC_CRIT) ;
+  /sbin/dosfsck                        -&#62; $(SEC_CRIT) ;
+  /sbin/e2fsck                         -&#62; $(SEC_CRIT) ;
+  /sbin/debugfs                        -&#62; $(SEC_CRIT) ;
+  /sbin/dumpe2fs                       -&#62; $(SEC_CRIT) ;
+  /sbin/dump                           -&#62; $(SEC_CRIT) ;
+...</PRE
+></TD
+></TR
+></TABLE
+>
+	Como Ud. ya se imaginará, esto corresponde a un conjunto
+	de archivos que se monitorean por Tripwire. Nosotros
+	reduciremos la extensa lista recortando el archivo
+	en esta sección. Por ejemplo, haciendo que termine en
+	<B
+CLASS="COMMAND"
+>/sbin/e2fsck</B
+>:
+<TABLE
+BORDER="0"
+BGCOLOR="#E0E0E0"
+WIDTH="100%"
+><TR
+><TD
+><PRE
+CLASS="SCREEN"
+>...
+################################################ #
+# File System and Disk Administration Programs # #
+################################################
+(
+  rulename = "File System and Disk Administraton Programs",
+  severity = $(SIG_HI)
+)
+{
+  /sbin/accton                         -&#62; $(SEC_CRIT) ;
+  /sbin/badblocks                      -&#62; $(SEC_CRIT) ;
+  /sbin/dosfsck                        -&#62; $(SEC_CRIT) ;
+  /sbin/e2fsck                         -&#62; $(SEC_CRIT) ;
+}
+# AHORA AQUI TERMINA EL ARCHIVO. OBSERVE LA LLAVE DE CIERRE.</PRE
+></TD
+></TR
+></TABLE
+>
+	Como se ve, hemos recortado la parte que estaba más
+	abajo de <B
+CLASS="COMMAND"
+>/sbin/e2fsck</B
+>, y hemos
+	tenido cuidado de añadir una llave de cierre (}) para
+	mantener la sintaxis del archivo. A fin de ver
+	los posibles errores con que nos podemos encontrar,
+	sugiero al lector que añada un archivo inexistente
+	a la lista:
+<TABLE
+BORDER="0"
+BGCOLOR="#E0E0E0"
+WIDTH="100%"
+><TR
+><TD
+><PRE
+CLASS="SCREEN"
+>...
+################################################ #
+# File System and Disk Administration Programs # #
+################################################
+(
+  rulename = "File System and Disk Administraton Programs",
+  severity = $(SIG_HI)
+)
+{
+  /sbin/accton                         -&#62; $(SEC_CRIT) ;
+  /sbin/badblocks                      -&#62; $(SEC_CRIT) ;
+  /sbin/dosfsck                        -&#62; $(SEC_CRIT) ;
+  /sbin/e2fsck                         -&#62; $(SEC_CRIT) ;
+
+# ARCHIVO DE PRUEBA INEXISTENTE AÑADIDO. OBSERVE QUE ESTA
+# UBICADO ANTES DE LA LLAVE DE CIERRE
+  /sbin/lechuga                        -&#62; $(SEC_CRIT) ;
+}
+# AHORA AQUI TERMINA EL ARCHIVO</PRE
+></TD
+></TR
+></TABLE
+>
+	Tenga cuidado de no insertar este archivo por debajo
+	de la llave de cierre del grupo. 
+	Recuerde que
+	más tarde deberá vérselas con el archivo original
+	que contiene (en mi caso) 452 entradas.
+        </P
+></DIV
+><DIV
+CLASS="SECT2"
+><HR><H2
+CLASS="SECT2"
+><A
+NAME="AEN60"
+>Instalar el archivo de políticas</A
+></H2
+><P
+>	Cuando el archivo de políticas contiene todo lo que
+	pretendemos monitorear, es menester "instalarlo". En
+	realidad Tripwire usa una versión compilada y encriptada
+	de este archivo, que se almacena en
+	<TT
+CLASS="FILENAME"
+>/etc/tripwire/tw.pol</TT
+>. Para generarlo
+	(y regenerarlo cuantas veces se necesite), usar:
+<TABLE
+BORDER="0"
+BGCOLOR="#E0E0E0"
+WIDTH="100%"
+><TR
+><TD
+><PRE
+CLASS="SCREEN"
+># twadmin -m P /etc/tripwire/twpol.txt</PRE
+></TD
+></TR
+></TABLE
+>
+        </P
+></DIV
+><DIV
+CLASS="SECT2"
+><HR><H2
+CLASS="SECT2"
+><A
+NAME="AEN65"
+>Construir la base de datos Tripwire</A
+></H2
+><P
+>Una vez configurado e instalado el archivo de
+	políticas, Tripwire necesita recolectar la información
+	actual de los archivos que debe monitorear. Dicha
+	información se almacena en una base de datos especial
+	generada mediante el comando:
+<TABLE
+BORDER="0"
+BGCOLOR="#E0E0E0"
+WIDTH="100%"
+><TR
+><TD
+><PRE
+CLASS="SCREEN"
+># tripwire -m i 2&#62; /tmp/mensajes</PRE
+></TD
+></TR
+></TABLE
+>
+	Hemos redirigido parte de la salida de este comando
+	al archivo /tmp/mensajes. Es muy probable que hayan
+	archivos especificados en las políticas
+	(<TT
+CLASS="FILENAME"
+>twpol.txt</TT
+>) que
+	no existen o están incorrectamente escritos (como
+	<B
+CLASS="COMMAND"
+>lechuga</B
+>.) Esto quedará
+	registrado en <TT
+CLASS="FILENAME"
+>/tmp/mensajes</TT
+>. Los
+	errores deberán corregirse en <TT
+CLASS="FILENAME"
+>twpol.txt</TT
+>,
+	el cual se deberá reinstalar, para proceder a reconstruir
+	la base de datos Tripwire. Este procedimiento se repetirá
+	mientras subsistan errores en el archivo de políticas.
+	</P
+><P
+>	Borre el archivo <TT
+CLASS="FILENAME"
+>/tmp/mensajes</TT
+> cuando
+	hayan desaparecido todos los errores.
+	</P
+></DIV
+><DIV
+CLASS="SECT2"
+><HR><H2
+CLASS="SECT2"
+><A
+NAME="AEN75"
+>Verificación del filesystem</A
+></H2
+><P
+>	Ahora que Tripwire está correctamente configurado con
+	su base de datos, es el momento
+	de verificar la integridad del filesystem. Esto se consigue
+	con el comando:
+<TABLE
+BORDER="0"
+BGCOLOR="#E0E0E0"
+WIDTH="100%"
+><TR
+><TD
+><PRE
+CLASS="SCREEN"
+># tripwire -m c</PRE
+></TD
+></TR
+></TABLE
+>
+	Este comando se usará cada vez que deseamos saber que nuestro
+	sistema no ha sido alterado.</P
+><P
+>	Si por algún motivo algunos de los archivos monitoreados
+	son modificados (por ejemplo, por una actualización en
+	el software) entonces debemos reconstruir la base de datos
+	como se vió en el paso anterior, a fin de que no aparezcan
+	discrepancias con el estado actual del filesystem en
+	las próximas verificaciones.
+	</P
+><P
+>	Si deseamos dejar de monitorear ciertos archivos o
+	iniciar el monitoreo de otros, entonces debemos
+	configurar el archivo de políticas (<TT
+CLASS="FILENAME"
+>twpol.txt</TT
+>)
+	como se vió anteriormente, y reinstalarlo. Después, se
+	volverá a generar la base de datos del filesystem. Este
+	proceso lamentablemente puede ser muy tedioso cuando
+	hay muchos archivos por monitorear.
+	</P
+></DIV
+></DIV
+><DIV
+CLASS="SECT1"
+><HR><H1
+CLASS="SECT1"
+><A
+NAME="AEN82"
+>Configuración permanente de Tripwire</A
+></H1
+><DIV
+CLASS="SECT2"
+><H2
+CLASS="SECT2"
+><A
+NAME="AEN84"
+>Automatización</A
+></H2
+><P
+>        Ahora que Ud. ha probado la correcta ejecución de
+	Tripwire, debemos programar su ejecución automática. Se
+	aconseja una frecuencia diaria, aunque el administrador
+	es libre de usar otro esquema. En RedHat 7.1, la ejecución
+	diaria de tripwire se efectúa fácilmente creando un
+	archivo en el directorio <TT
+CLASS="FILENAME"
+>/etc/cron.daily</TT
+> (por
+	ejemplo, <TT
+CLASS="FILENAME"
+>/etc/cron.daily/tripwire</TT
+> con
+	el siguiente contenido:
+<TABLE
+BORDER="0"
+BGCOLOR="#E0E0E0"
+WIDTH="100%"
+><TR
+><TD
+><PRE
+CLASS="SCREEN"
+>/usr/sbin/tripwire -m c | mail root@localhost</PRE
+></TD
+></TR
+></TABLE
+>
+	Donde Ud. deberá modificar la dirección "root@localhost" por
+	lo que más le convenga. No olvide asegurarse de que el servicio
+	<B
+CLASS="COMMAND"
+>cron</B
+> esté operativo.
+	</P
+><P
+>	Asegúrese de que este archivo para cron sea ejecutable:
+<TABLE
+BORDER="0"
+BGCOLOR="#E0E0E0"
+WIDTH="100%"
+><TR
+><TD
+><PRE
+CLASS="SCREEN"
+># chmod 755 /etc/cron.daily/tripwire</PRE
+></TD
+></TR
+></TABLE
+>
+	</P
+></DIV
+><DIV
+CLASS="SECT2"
+><HR><H2
+CLASS="SECT2"
+><A
+NAME="AEN93"
+>Notificación vía email</A
+></H2
+><P
+>	Esta funcionalidad proporciona un control más flexible
+	con respecto a los reportes vía email.
+	Tripwire es capaz
+	de notificar por email sin necesidad de que el administrador
+	invoque a un cliente de correo como en el ejemplo anterior (en
+	que invocamos a <B
+CLASS="COMMAND"
+>mail</B
+>. Para esto, en el
+	archivo de políticas debemos insertar la directiva:
+<TABLE
+BORDER="0"
+BGCOLOR="#E0E0E0"
+WIDTH="100%"
+><TR
+><TD
+><PRE
+CLASS="SCREEN"
+>emailto = user@host.domain</PRE
+></TD
+></TR
+></TABLE
+>
+	Esta directiva debe insertarse en la configuración de
+	cada grupo de archivos que vamos a monitorear. Cuando
+	alguno de estos archivos es modificado, Tripwire notifica
+	al destinatario especificado. Por ejemplo, si queremos
+	ser alertados cuando hubieren modificaciones de los
+	archivos de administración del kernel, debemos modificar
+	la sección correspondiente:
+
+<TABLE
+BORDER="0"
+BGCOLOR="#E0E0E0"
+WIDTH="100%"
+><TR
+><TD
+><PRE
+CLASS="SCREEN"
+>...
+# Kernel Administration Programs # #
+(
+  rulename = "Kernel Administration Programs",
+  severity = $(SIG_HI)
+)
+{
+  /sbin/depmod                         -&#62; $(SEC_CRIT) ;
+  /sbin/adjtimex                       -&#62; $(SEC_CRIT) ;
+  /sbin/ctrlaltdel                     -&#62; $(SEC_CRIT) ;
+  /sbin/insmod                         -&#62; $(SEC_CRIT) ;
+...</PRE
+></TD
+></TR
+></TABLE
+>
+
+e insertar <B
+CLASS="COMMAND"
+>emailto</B
+>:
+
+<TABLE
+BORDER="0"
+BGCOLOR="#E0E0E0"
+WIDTH="100%"
+><TR
+><TD
+><PRE
+CLASS="SCREEN"
+>...
+# Kernel Administration Programs # #
+(
+  rulename = "Kernel Administration Programs",
+  severity = $(SIG_HI), emailto = root@localhost
+)
+{
+  /sbin/depmod                         -&#62; $(SEC_CRIT) ;
+  /sbin/adjtimex                       -&#62; $(SEC_CRIT) ;
+  /sbin/ctrlaltdel                     -&#62; $(SEC_CRIT) ;
+  /sbin/insmod                         -&#62; $(SEC_CRIT) ;
+...</PRE
+></TD
+></TR
+></TABLE
+>
+
+	Tripwire normalmente invoca para esto
+	a <B
+CLASS="COMMAND"
+>sendmail</B
+>.
+	</P
+><P
+>	Si Ud. usa <B
+CLASS="COMMAND"
+>vi</B
+>, puede insertar
+	automáticamente la directiva <B
+CLASS="COMMAND"
+>emailto</B
+>
+	en todas las secciones del archivo con el siguiente
+	comando "de última línea":
+<TABLE
+BORDER="0"
+BGCOLOR="#E0E0E0"
+WIDTH="100%"
+><TR
+><TD
+><PRE
+CLASS="SCREEN"
+>:1,$s/severity =.*/&#38;,emailto = root@localhost/</PRE
+></TD
+></TR
+></TABLE
+>
+	Asegúrese de respetar todos los espacios y los signos
+	de puntuación.
+	</P
+><P
+>	Finalmente, el archivo <TT
+CLASS="FILENAME"
+>/etc/cron.daily/tripwire</TT
+>
+	debe ser modificado del siguiente modo:
+<TABLE
+BORDER="0"
+BGCOLOR="#E0E0E0"
+WIDTH="100%"
+><TR
+><TD
+><PRE
+CLASS="SCREEN"
+>/usr/sbin/tripwire -m c --email-report</PRE
+></TD
+></TR
+></TABLE
+>
+	</P
+><P
+>	El archivo de configuración <TT
+CLASS="FILENAME"
+>twcfg.txt</TT
+>
+	contiene algunos parámetros adicionales para la configuración
+	del sistema de notificación de email. Por ejemplo, es
+	posible configurar si se deben enviar reportes aún si
+	no han habido problemas
+	(ver directiva <B
+CLASS="COMMAND"
+>MAILNOVIOLATIONS</B
+> de
+	<TT
+CLASS="FILENAME"
+>twcfg.txt</TT
+>.) También se puede
+	seleccionar el agente de mensajería
+	(ver directiva <B
+CLASS="COMMAND"
+>MAILPROGRAM</B
+>) a fin
+	de no usar <B
+CLASS="COMMAND"
+>sendmail</B
+> y generar
+	una conexión directa SMTP hacia otro host.
+	</P
+><P
+>	Consulte el manual de twconfig(4) y twpolicy(4) para más 
+	opciones y ejemplos.
+	</P
+></DIV
+></DIV
+><DIV
+CLASS="SECT1"
+><HR><H1
+CLASS="SECT1"
+><A
+NAME="AEN116"
+>Eliminación de archivos de texto</A
+></H1
+><P
+>        Tripwire guarda su configuración y la política del filesystem
+	en dos archivos encriptados con la "clave del site". Estos
+	son: <TT
+CLASS="FILENAME"
+>/etc/tripwire/tw.cfg</TT
+> y
+	<TT
+CLASS="FILENAME"
+>/etc/tripwire/tw.pol</TT
+>, respectivamente.
+	El primero se generó a partir de
+	<TT
+CLASS="FILENAME"
+>/etc/tripwire/twcfg.txt</TT
+> cuando se configuraron
+	las claves, y el segundo ha sido regenerado cada vez que Ud.
+	modificó su archivo de políticas
+	<TT
+CLASS="FILENAME"
+>/etc/tripwire/twpol.txt</TT
+>. Por seguridad, Ud.
+	no debería mantenerlos en el sistema hasta que se vuelvan a
+	necesitar, así que proceda a borrarlos:
+<TABLE
+BORDER="0"
+BGCOLOR="#E0E0E0"
+WIDTH="100%"
+><TR
+><TD
+><PRE
+CLASS="SCREEN"
+># rm /etc/tripwire/twcfg.txt /etc/tripwire/twpol.txt</PRE
+></TD
+></TR
+></TABLE
+>
+	Cuando Ud. necesite hacer una modificación de la política,
+	puede regenerar el archivo <TT
+CLASS="FILENAME"
+>twpol.txt</TT
+>
+	del siguiente modo:
+<TABLE
+BORDER="0"
+BGCOLOR="#E0E0E0"
+WIDTH="100%"
+><TR
+><TD
+><PRE
+CLASS="SCREEN"
+># twadmin -m p &#62; /etc/tripwire/twpol.txt</PRE
+></TD
+></TR
+></TABLE
+>
+	Y el de configuración mediante:
+<TABLE
+BORDER="0"
+BGCOLOR="#E0E0E0"
+WIDTH="100%"
+><TR
+><TD
+><PRE
+CLASS="SCREEN"
+># twadmin -m f &#62; /etc/tripwire/twcfg.txt</PRE
+></TD
+></TR
+></TABLE
+>
+	</P
+></DIV
+><DIV
+CLASS="SECT1"
+><HR><H1
+CLASS="SECT1"
+><A
+NAME="AEN127"
+>Script check_twpol.sh</A
+></H1
+><P
+>	Tal como se indicó, eventualmente Ud. deberá emplear
+	el archivo <TT
+CLASS="FILENAME"
+>twpol.txt</TT
+> que viene con
+	tripwire, el cual
+	contiene numerosas referencias a los archivos del sistema.
+	Sin embargo, este archivo en casi todos los casos deberá
+	personalizarse puesto que no todos los sistemas tienen
+	instalados los mismos archivos.
+        </P
+><P
+>	A fin de agilizar este proceso (que es tremendamente tedioso),
+	confeccioné el siguiente script que genera una versión "corregida"
+	del <TT
+CLASS="FILENAME"
+>twpol.txt</TT
+> contrastándo el original
+	contra lo que se encuentra en el sistema. Este script NO modifica
+	el archivo <TT
+CLASS="FILENAME"
+>twpol.txt</TT
+>, sino por el contrario,
+	deja la "nueva versión" en <TT
+CLASS="FILENAME"
+>/tmp/new.twpol.txt</TT
+>.
+        </P
+><P
+>	Para ejecutarlo, simplemente escribir:
+<TABLE
+BORDER="0"
+BGCOLOR="#E0E0E0"
+WIDTH="100%"
+><TR
+><TD
+><PRE
+CLASS="SCREEN"
+># bash check_twpol.sh</PRE
+></TD
+></TR
+></TABLE
+>
+	El script de preferencia deberá ser descargado y no copiado
+	manualmente (debe estar disponible junto con este documento
+	o en mi web site) a fin de evitar sutiles errores entre
+	espacios y tabulados. De igual modo, ahí va:
+<TABLE
+BORDER="0"
+BGCOLOR="#E0E0E0"
+WIDTH="100%"
+><TR
+><TD
+><PRE
+CLASS="SCREEN"
+>&#13;#!/bin/bash
+#
+# Generacion de version corregida de archivo de politicas twpol.txt
+# (C) 2002-4002 Diego (www.compulinux.com/diego)
+#
+# Por favor verifique estas variables:
+# Please cheack these veriables:
+
+# Original twpol.txt
+TWPOL=/etc/tripwire/twpol.txt
+
+# Donde buscar nuevos archivos
+# Where to search for new files
+SRC_DIR="/sbin /etc /etc/sysconfig /bin"
+
+# El twpol.txt generado
+# Generated twpol.txt
+RESULTADO=/tmp/new.twpol.txt
+
+### END OF COMMENTS
+
+if [ ! -f $TWPOL ]; then
+	echo "$TWPOL debe existir para poder empezar!"
+	echo "$TWPOL must exist for running this thing!"
+	exit
+fi
+
+echo "Quitando archivos inexistentes de twpol.txt"
+echo "Cutting non-existent files from twpol.txt"
+while read L
+do
+# Cuidado: entre corchetes se escribe un espacio y un tab (3 lineas abajo)
+# Beware: between brackets there is a space and a tab (following 3 lines)
+if echo "$L" | grep '^[ 	]*/' &#62; /dev/null ; then
+	PX=$(echo "$L" | sed 's/^[ 	]*\([^ 	]*\).*/\1/')
+	PY=$(echo "$L" | sed 's/^[ 	]*\([^ 	]*\)\(.*\)/\2/')
+	if [ -e "$PX" ]; then
+		echo "$PX $PY"
+	else
+		echo "#-- $PX $PY"
+		echo -n '.' &#62; /dev/tty
+		# echo $PX &#62; /dev/tty
+	fi
+else
+	echo "$L"
+fi
+
+done &#60; $TWPOL &#62; $RESULTADO
+
+echo
+echo "Insertando nuevos archivos en twpol.txt"
+echo "Inserting new files to twpol.txt"
+
+for DIR in $SRC_DIR
+do
+echo "#-- "
+echo "#-- "
+echo "#-- "
+echo "("
+echo "rulename = \"$DIR\","
+echo 'severity = $(SIG_HI)'
+echo ")"
+echo "{"
+	echo &#62; /dev/tty
+	echo "Procesando $DIR" &#62; /dev/tty
+	echo "Processing $DIR" &#62; /dev/tty
+	for F in $DIR/*
+	do
+# Cuidado: entre corchetes se escribe un espacio y un tab (siguiente linea)
+# Beware: between brackets there is a space and a tab (next linea)
+		if [ -f $F ] &#38;&#38; ! grep  "^[ 	]*$F[ 	]" $RESULTADO &#62; /dev/null ; then
+			echo "	$F		-&#62; \$(SEC_CRIT) ;"
+			echo -n "." &#62; /dev/tty
+		fi
+	done
+echo "}"
+done &#62;&#62; $RESULTADO
+echo
+echo "El nuevo archivo twpol.txt se ha generado en $RESULTADO"
+echo "New twpol.txt file was generated as $RESULTADO"</PRE
+></TD
+></TR
+></TABLE
+>
+	</P
+></DIV
+></DIV
+></BODY
+></HTML
+>

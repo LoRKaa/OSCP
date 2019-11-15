@@ -1,0 +1,59 @@
+#Instalaremos ttysnoop para monitorizar usuarios
+
+wget http://freshmeat.net/redir/ttysnoop26/50871/url_tgz/ttysnoop-0.12d.k26.tar.gz
+
+#Descomprimimos y hacemos make y make install
+
+mkdir /var/spool/ttysnoop
+cp snooptab.dist /etc/snooptab
+
+#Editamos /etc/snooptab y comentamos todas las lineas excepto:
+# * socket login /bin/login
+
+#Ahora modificamos los fuentes del ssh para que el user se identifique mediante 
+# /sbin/ttysnoop en lugar de /usr/sbin/login
+
+mkdir /usr/src/ssh
+cd /usr/src/ssh
+apt-get build-dep ssh
+apt-get source ssh
+
+#Ahora editamos con vim el fichero openssh-4.3p2/debian/rules y buscamos
+# -DLOGIN_PROGRAM=\"/bin/login\" y lo reemplazamos por -DLOGIN_PROGRAM=\"/sbin/ttysnoops\"
+#grabamos y salimos para crear el paquete .deb del nuevo openssh
+
+dpkg-buildpackage -uc -b -rfakeroot
+
+#esto nos genera /usr/src/ssh/openssh-server_4.3p2-9_i386.deb y lo instalamos
+
+dpkg -i openssh-server_4.3p2-9_i386.deb
+
+#Editamos /etc/ssh/sshd_config y cambiamos lo siguiente
+PasswordAuthentication yes
+UseLogin yes
+
+#Reiniciamos ssh
+/etc/init.d/ssh restart
+
+#y ahora para ver a un usuario hacemos who
+
+~$ who
+diego    pts/2        2007-06-29 05:13 (192.168.1.17)
+
+#y para monitorizar a diego solo hacemos
+
+~$ ttysnoop 2 
+
+#y introducimos la contraseña de root
+
+#################
+##Para logear a un usuario haremos
+
+ttysnoop 2 > /path/to/logfile 2>&1
+
+##Introducimos la contraseña y ya estaremos logeando
+##Podemos ver el log en vivo haciendo tail -f /path/to/logfile
+
+
+
+

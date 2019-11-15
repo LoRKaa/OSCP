@@ -1,0 +1,81 @@
+ENJAULAR A UN USUARIO EN NUESTRO SISTEMA
+
+*/ chroot nos da la posibilidad de enjaular a un usuario literalmente en su /home , aqui 
+vemos una forma sencilla pero eficaz de construir jails a nuestra medida */
+
+Necesitamos :
+
+- sudo 
+- chroot
+
+Procedimiento : 
+
+***Añadimos el usuario que sera enjaulado
+
+gorrion:/# adduser gorrion
+
+***Creamos la shell que utilizara el usuario en /bin
+
+gorrion:/# vi /bin/jail
+
+----------------
+#!bin/bash
+/usr/bin/sudo /usr/sbin/chroot /home/$USER /bin/bash
+----------------
+
+gorrion:/# chmod +x /bin/jail
+
+**Una vez que hemos creado la shell, necesitamos hacerla valida
+
+gorrion:/# vi /etc/shells ***y añadimos /bin/jail
+
+***Creamos en /home/gorrion directorios de sistema
+
+gorrion:/# mkdir /home/gorrion/bin
+gorrion:/# mkdir /home/gorrion/usr
+gorrion:/# mkdir /home/gorrion/usr/bin
+gorrion:/# mkdir /home/gorrion/lib
+
+***Copiamos /bin/bash a /home/gorrion/bin y sus correspondientes librerias a /home/gorrion/lib
+
+gorrion:/# cp /bin/bash /home/gorrion/bin
+gorrion:/# ldd /bin/bash
+        libncurses.so.5 => /lib/libncurses.so.5 (0x4001e000)
+        libdl.so.2 => /lib/libdl.so.2 (0x40060000)
+        libc.so.6 => /lib/libc.so.6 (0x40064000)
+        /lib/ld-linux.so.2 (0x40000000)
+
+***hacemos lo mismo con los comandos /bin/ls , /bin/uname , /bin/cp y asi hasta el punto que
+queramos encerrar al usuario
+
+***lanzamos usermod
+gorrion:/# usermod -s /bin/jail gorrion
+
+***damos permisos al user en /etc/sudoers para poder lanzar chroot
+
+gorrion:/# vi /etc/sudoers
+
+---------------
+# /etc/sudoers
+#
+# This file MUST be edited with the 'visudo' command as root.
+#
+# See the man page for details on how to write a sudoers file.
+#
+
+# Host alias specification
+
+# User alias specification
+
+# Cmnd alias specification
+
+# User privilege specification
+root    ALL=(ALL) ALL
+gorrion ALL= NOPASSWD: /usr/sbin/chroot
+-----------------
+
+***hacemos propietario de su /home al user
+
+chown -R gorrion /home/gorrion
+
+***Ya tenemos nuestra jail lista.

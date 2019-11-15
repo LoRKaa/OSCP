@@ -1,0 +1,93 @@
+####Compilando kernel en ubuntu feisty fawn y parcheandolo con grsec######
+
+#Necesitamos:
+
+Kernel 2.6.19.2 -> http://www.kernel.org/pub/linux/kernel/v2.6/linux-2.6.19.2.tar.gz
+Grsec Patch para kernel 2.6.19-2 -> http://grsecurity.net/grsecurity-2.1.10-2.6.19.2-200701222307.patch.gz
+
+#Dependencias:
+
+make
+gcc
+libncurses5-dev
+nasm
+modutils
+initrd-tools
+module-assistant
+kernel-package
+
+#Compilando (usuario normal, no-root):
+$ wget http://www.kernel.org/pub/linux/kernel/v2.6/linux-2.6.19.2.tar.gz
+$ tar zxvf linux-2.6.19.2.tar.gz
+$ cd linux-2.6.19.2
+$ make menuconfig
+$ make clean
+$ make bzImage
+$ make modules
+$ sudo make modules_install
+$ sudo cp arch/i386/boot/bzImage /boot/kernel-2.6.19-2
+$ sudo mkinitrd -o /boot/kernel-2.6.19-2.img /lib/modules/2.6.19.2/
+
+*Editamos /boot/grub/menu.lst y añadimos nuestro kernel nuevo
+
+#Configuracion para mi portaka que tiene la direccion del disco en sda1
+
+title           Kernel 2.6.19
+root            (hd0,0)
+kernel          /boot/kernel-2.6.19-2 root=/dev/sda1 ro quiet splash
+initrd          /boot/kernel-2.6.19-2.img
+quiet
+savedefault
+
+#end
+
+..Rebooting....
+......OK!!! El kernel aparece en el grub y arranca perfectamente
+~$ uname -a
+Linux kaiser 2.6.19.2 #1 SMP Sat Jun 16 03:20:32 CEST 2007 i686 GNU/Linux
+
+##Instalando Grsec Como usuario normal (no-root)
+##Repetimos los mismos pasos que para compilar un kernel normal pero antes lo parcheamos
+
+
+$ wget http://www.kernel.org/pub/linux/kernel/v2.6/linux-2.6.19.2.tar.gz
+$ wget http://grsecurity.net/grsecurity-2.1.10-2.6.19.2-200701222307.patch.gz
+$ tar zxvf linux-2.6.19.2.tar.gz
+$ gunzip < grsecurity-2.1.10-2.6.19.2-200701222307.patch.gz | patch -p0
+$ mv linux-2.6.19.2 linux-2.6.19.2-grsec
+$ ln -s linux-2.6.19.2-grsec linux
+$ cd linux
+$ cp /boot/config-2.6.20-16-generic .config
+$ make menuconfig
+##Hacemos load config
+##Configuramos nuestro procesador, activamos grsec en security y tocamos sus opciones 
+##He tenido problemas al compilar los drivers activando protecciones de memoria y demas opciones de grsec, y al primer
+##intento no me compilaba la imagen .img
+##El segundo intento ha funcionado sin problemas dejando la configuracion del make menuconfig casi por defecto, solo
+##cambiando el micro (en mi caso por un Pentium M) y cambiando el nivel de seguridad a Medium
+$ make clean
+$ make bzImage
+$ make modules
+$ sudo make modules_install
+$ sudo cp arch/i386/boot/bzImage /boot/kernel-2.6.19-2-grsec 
+$ sudo mkinitrd -o /boot/kernel-2.6.19-2-grsec.img /lib/modules/2.6.19.2-grsec/ 
+
+*Editamos /boot/grub/menu.lst y añadimos nuestro kernel ya con grsec
+
+title           Kernel 2.6.19-grsec
+root            (hd0,0)
+kernel          /boot/kernel-2.6.19-2-grsec root=/dev/sda1 ro quiet splash
+initrd          /boot/kernel-2.6.19-2-grsec.img
+quiet
+savedefault
+
+#end
+
+Reiniciamos el sistema....
+.....OK!!!! Nuestro kernel con grsec arranca bastante mas rapido y sin problemas
+~$ uname -a
+Linux kaiser 2.6.19.2-grsec #1 SMP Sat Jun 16 08:36:36 CEST 2007 i686 GNU/Linux
+
+
+
+
