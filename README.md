@@ -5,7 +5,7 @@
 # OSCP
 > Preparacion del OSCP 2019
 
-## Maquinas
+## Lab
 [KaliOSCP](https://images.offensive-security.com/pwk-kali-vm.7z)
 <br>
 [WindowsXP](https://mega.nz/#!rdsE1ISL!NHk26-tE6iOu-0DkjRbfz1h0Xp79nq4daHYDvXxAcZ0)
