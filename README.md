@@ -8,7 +8,7 @@
 ## Maquinas
 [KaliOSCP](https://images.offensive-security.com/pwk-kali-vm.7z)
 <br>
-[WindowsXP](https://www.makeuseof.com/tag/download-windows-xp-for-free-and-legally-straight-from-microsoft-si/)
+[WindowsXP](https://mega.nz/#!rdsE1ISL!NHk26-tE6iOu-0DkjRbfz1h0Xp79nq4daHYDvXxAcZ0)
 <br>
 [Windows 10 vm](https://developer.microsoft.com/es-es/windows/downloads/virtual-machines)
 <br>
@@ -43,6 +43,8 @@
 [Pompem - Search vulns](https://github.com/rfunix/Pompem)
 <br>
 [XSSer - Cross Site Scripter Framework](https://github.com/epsylon/xsser)
+<br>
+[Nishang - Collection of scripts and payloads for PowerShell](https://github.com/samratashok/nishang/blob/master/README.md)
 
 ## Recursos
 [Examen de prueba](https://www.hackplayers.com/2018/08/examen-de-prueba-para-estudiantes-del-OSCP.html)
@@ -61,6 +63,8 @@
 <br>
 [IppSec Videos - HTB retired machines](https://www.youtube.com/channel/UCa6eh7gCkpPo5XXUDfygQQA/videos)
 <br>
+[Windows Privilege Escalation Fundamentals](https://www.fuzzysecurity.com/tutorials/16.html)
+<br>
 
 ## b0f's
 [Veteransec](https://veteransec.com/2018/09/10/32-bit-windows-buffer-overflows-made-easy/)
@@ -71,7 +75,4 @@ Simple Buffer Overflow [parte1](https://mega.nz/#!2dMDUSAQ!Cj_7jFtjKMq0VtFpG6N9j
 <br>
 Stack Overflow en Español [parte1](https://youtu.be/7KZ5LCFr6Sw) [parte2](https://www.youtube.com/watch?v=eajvZQNoUq0)
 
-## Windows
-[fuzzysec](https://www.fuzzysecurity.com/tutorials/16.html)
-<br>
-[nishang](https://github.com/samratashok/nishang/blob/master/README.md)
+
