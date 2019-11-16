@@ -10,6 +10,9 @@
 <br>
 [WindowsXP](https://www.makeuseof.com/tag/download-windows-xp-for-free-and-legally-straight-from-microsoft-si/)
 <br>
+[Windows 10 vm](https://developer.microsoft.com/es-es/windows/downloads/virtual-machines)
+<br>
+[Windows Server Eval Center](https://www.microsoft.com/es-xl/evalcenter/evaluate-windows-server-2019)
 
 ## Guias
 [scund00r](https://scund00r.com/all/oscp/2018/02/25/passing-oscp.html)
@@ -57,6 +60,7 @@
 [Exploit Exercises](https://github.com/FFY00/exploit-exercises)
 <br>
 [IppSec Videos - HTB retired machines](https://www.youtube.com/channel/UCa6eh7gCkpPo5XXUDfygQQA/videos)
+<br>
 
 ## b0f's
 [Veteransec](https://veteransec.com/2018/09/10/32-bit-windows-buffer-overflows-made-easy/)
