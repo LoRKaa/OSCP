@@ -51,7 +51,7 @@
 <br>
 [ihack4falafel](https://github.com/ihack4falafel/OSCP)
 <br>
-[Cheetsheets](https://ired.team/offensive-security-experiments/offensive-security-cheetsheets)
+[Pentesting Cheetsheets](https://ired.team/offensive-security-experiments/offensive-security-cheetsheets)
 <br>
 [jivoi](https://github.com/jivoi/pentest)
 <br>
@@ -65,6 +65,7 @@
 <br>
 [Windows Privilege Escalation Fundamentals](https://www.fuzzysecurity.com/tutorials/16.html)
 <br>
+[Virtual Hacking Labs - Curso con lab like OSCP 100$/month](https://www.virtualhackinglabs.com/labs/penetration-testing-lab/)
 
 ## b0f's
 [Veteransec](https://veteransec.com/2018/09/10/32-bit-windows-buffer-overflows-made-easy/)
