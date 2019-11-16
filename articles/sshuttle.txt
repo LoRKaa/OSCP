@@ -1,0 +1,11 @@
+[+] Nombre : sshuttle
+[+] Github : https://github.com/sshuttle/sshuttle
+[+] Desc.  : Tunel SSH
+
+Situaciones de trabajo :
+
+* Tu máquina cliente (o enrutador) es Linux, FreeBSD o MacOS.
+* Tienes acceso a una red remota a través de ssh.
+* No necesariamente tienes acceso de administrador en la red remota.
+
+

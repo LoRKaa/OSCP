@@ -34,6 +34,12 @@
 [OBS - Screen Video Recorder Software](https://obsproject.com/)
 <br>
 [CrackMapExec](https://github.com/byt3bl33d3r/CrackMapExec)
+<br>
+[Arachni - Web APP security scanner framework](https://www.arachni-scanner.com/download/)
+<br>
+[Pompem - Search vulns](https://github.com/rfunix/Pompem)
+<br>
+[XSSer - Cross Site Scripter Framework](https://github.com/epsylon/xsser)
 
 ## Recursos
 [Examen de prueba](https://www.hackplayers.com/2018/08/examen-de-prueba-para-estudiantes-del-OSCP.html)
