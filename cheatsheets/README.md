@@ -11,3 +11,5 @@
 [Penetration testing methodology](http://www.0daysecurity.com/pentest.html)
 <br>
 [SQL injection](http://michaeldaw.org/alerts/sql-injection-cheat-sheet/)
+<br>
+[SQL injection](http://pentestmonkey.net/cheat-sheet/sql-injection/mysql-sql-injection-cheat-sheet)
