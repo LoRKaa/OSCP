@@ -26,6 +26,8 @@
 [AlienVault](https://www.alienvault.com/blogs/security-essentials/how-to-prepare-to-take-the-oscp)
 <br> 
 [OSCP BIBLE](https://github.com/mohitkhemchandani/OSCP_BIBLE)
+<br>
+[s4vitar](https://gist.github.com/s4vitar/b88fefd5d9fbbdcc5f30729f7e06826e)
 
 ## Tools
 [sshuttle - Tunel SSH que funciona como una VPN](https://github.com/sshuttle/sshuttle)
@@ -57,8 +59,6 @@
 <br>
 [0x4D31](https://github.com/0x4D31/awesome-oscp#oscp-reviews-and-guides)
 <br>
-[s4vitar](https://gist.github.com/s4vitar/b88fefd5d9fbbdcc5f30729f7e06826e)
-<br>
 [Exploit Exercises](https://github.com/FFY00/exploit-exercises)
 <br>
 [IppSec Videos - HTB retired machines](https://www.youtube.com/channel/UCa6eh7gCkpPo5XXUDfygQQA/videos)
@@ -66,6 +66,10 @@
 [Windows Privilege Escalation Fundamentals](https://www.fuzzysecurity.com/tutorials/16.html)
 <br>
 [Virtual Hacking Labs - Curso con lab like OSCP 100$/month](https://www.virtualhackinglabs.com/labs/penetration-testing-lab/)
+<br>
+[Active Directory Kill Chain Attack & Defense](https://github.com/infosecn1nja/AD-Attack-Defense)
+<br>
+[Shellcodes database](http://shell-storm.org/shellcode/)
 
 ## b0f's
 [Veteransec](https://veteransec.com/2018/09/10/32-bit-windows-buffer-overflows-made-easy/)
