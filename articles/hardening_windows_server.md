@@ -92,7 +92,7 @@
 <br>
 [SharpHound](https://github.com/BloodHoundAD/SharpHound)
 
-### Extras!!! 
+### ··· Extras!!! ····
 
 ## Restricted Admin Mode 
 [Remote Desktop Services: Enable Restricted Admin mode](https://social.technet.microsoft.com/wiki/contents/articles/32905.remote-desktop-services-enable-restricted-admin-mode.aspx)
