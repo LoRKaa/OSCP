@@ -1,8 +1,8 @@
 # RootedCON
-> Antonio Sanz 'Van a mear sangre'
+> Antonio Sanz · Van a mear sangre · 
 
 ## Slides
-[Van a mear sangre slides](https://drive.google.com/file/d/1ldsxQbTb2Aeqo5M5LfMlhGQnyiqkKIHj)
+[Cómo hacer que los atacantes deseen no haber entrado en tu red](https://drive.google.com/file/d/1ldsxQbTb2Aeqo5M5LfMlhGQnyiqkKIHj)
 
 ## Si solo puedes leer DOS enlaces
 [Preventing Mimikatz Attacks](https://medium.com/blue-team/preventing-mimikatz-attacks-ed283e7ebdd5)
