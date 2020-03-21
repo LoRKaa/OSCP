@@ -1,5 +1,5 @@
 # RootedCON
-> Antonio Sanz · Van a mear sangre · 
+> Antonio Sanz · Van a mear sangre
 
 ## Slides
 [Cómo hacer que los atacantes deseen no haber entrado en tu red](https://drive.google.com/file/d/1ldsxQbTb2Aeqo5M5LfMlhGQnyiqkKIHj)
