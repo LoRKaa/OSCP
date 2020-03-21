@@ -5,17 +5,26 @@
 [Van a mear sangre slides](https://drive.google.com/file/d/1ldsxQbTb2Aeqo5M5LfMlhGQnyiqkKIHj)
 
 ## Si solo puedes leer DOS enlaces
-[Preventing Mimikatz Attacks] (https://medium.com/blue-team/preventing-mimikatz-attacks-ed283e7ebdd5)
-[MitigatingPass-the-Hashand OtherCredential Theft,version 2] (https://download.microsoft.com/download/7/7/A/77ABC5BD-8320-41AF-863C-6ECFB10CB4B9/Mitigating-Pass-the-Hash-Attacks-and-Other-Credential-Theft-Version-2.pdf)
+[Preventing Mimikatz Attacks](https://medium.com/blue-team/preventing-mimikatz-attacks-ed283e7ebdd5)
+[MitigatingPass-the-Hashand OtherCredential Theft,version 2](https://download.microsoft.com/download/7/7/A/77ABC5BD-8320-41AF-863C-6ECFB10CB4B9/Mitigating-Pass-the-Hash-Attacks-and-Other-Credential-Theft-Version-2.pdf)
 
 ## SPF 
-[Sender Policy Framework] (https://es.wikipedia.org/wiki/Sender_Policy_Framework)
-[SPF - An Introduction] (http://www.open-spf.org/Introduction/)
-[SPF Record Check - Lookup SPF Records] (https://mxtoolbox.com/spf.aspx) 
+[Sender Policy Framework](https://es.wikipedia.org/wiki/Sender_Policy_Framework)
+[SPF - An Introduction](http://www.open-spf.org/Introduction/)
+[SPF Record Check - Lookup SPF Records](https://mxtoolbox.com/spf.aspx) 
 
 ## DKIM
-DomainKeys Identified Mail https://es.wikipedia.org/wiki/DomainKeys_Identified_Mail DKIM.org - Documentation http://dkim.org/ DKIM Record Check https://www.dmarcanalyzer.com/es/dkim-3/dkim-record-check/ Deshabilitar Macros + Localizaciones confiables Restricting or blocking Office 2016/2019 macros with Group Policy https://4sysops.com/archives/restricting-or-blocking-office-2016-2019-macros-with-group-policy/ Block macros in Microsoft Office suite using registry https://gist.github.com/PSJoshi/749cf1733217d8791cf956574a3583a2 New feature in Office 2016 can block macros and help prevent infection https://www.microsoft.com/security/blog/2016/03/22/new-feature-in-office-2016-can-block-macros-and-help-prevent-infection/ Add, remove, or change a trusted location https://support.office.com/en-us/article/add-remove-or-change-a-trusted-location-7ee1cdc2-483e-4cbb-bcb3-4e7c67147fb4 GPO Office 2016 to Allow Trusted Locations On my network https://community.spiceworks.com/topic/2121992-gpo-office-2016-to-allow-trusted-locations-on-my-network
- How to add a trusted location in excel via Group policy for all users in my Active Directory https://social.technet.microsoft.com/Forums/en-US/605788fa-0ea9-4b6d-96fe-a944a1796ebd/how-to-add-a-trusted-location-in-excel-via-group-policy-for-all-users-in-my-active-directory?forum=mdopagpm
+[DomainKeys Identified Mail](https://es.wikipedia.org/wiki/DomainKeys_Identified_Mail)
+[DKIM.org - Documentation](http://dkim.org/)
+[DKIM Record Check](https://www.dmarcanalyzer.com/es/dkim-3/dkim-record-check/)
+
+## Deshabilitar Macros + Localizaciones confiables 
+[Restricting or blocking Office 2016/2019 macros with Group Policy](https://4sysops.com/archives/restricting-or-blocking-office-2016-2019-macros-with-group-policy/)
+[Block macros in Microsoft Office suite using registry](https://gist.github.com/PSJoshi/749cf1733217d8791cf956574a3583a2)
+[New feature in Office 2016 can block macros and help prevent infection](https://www.microsoft.com/security/blog/2016/03/22/new-feature-in-office-2016-can-block-macros-and-help-prevent-infection/)
+[Add, remove, or change a trusted location](https://support.office.com/en-us/article/add-remove-or-change-a-trusted-location-7ee1cdc2-483e-4cbb-bcb3-4e7c67147fb4)
+[GPO Office 2016 to Allow Trusted Locations On my network](https://community.spiceworks.com/topic/2121992-gpo-office-2016-to-allow-trusted-locations-on-my-network)
+How to add a trusted location in excel via Group policy for all users in my Active Directory https://social.technet.microsoft.com/Forums/en-US/605788fa-0ea9-4b6d-96fe-a944a1796ebd/how-to-add-a-trusted-location-in-excel-via-group-policy-for-all-users-in-my-active-directory?forum=mdopagpm
 LAPS
 Step by Step Guide to Deploy Microsoft LAPS https://gallery.technet.microsoft.com/step-by-step-deploy-local-7c9ef772/file/150657/1/Step%20by%20Step%20Guide%20to%20Deploy%20Microsoft%20LAPS.pdf Deploying Microsoft LAPS – Part 1 https://blog.thesysadmins.co.uk/deploying-microsoft-laps-part-1.html Deploying Microsoft LAPS – Part 2 https://blog.thesysadmins.co.uk/deploying-microsoft-laps-part-2.html LAPSToolkit https://github.com/leoloobeek/LAPSToolkit Malicious use of Microsoft LAPS https://akijosberryblog.wordpress.com/2019/01/01/malicious-use-of-microsoft-laps/ Deshabilita login de admin en los puestos de trabajo Anexo F: protección de grupos de administradores de dominio en Active Directory https://docs.microsoft.com/es-es/windows-server/identity/ad-ds/plan/security-best-practices/appendix-f--securing-domain-admins-groups-in-active-directory Workstation Logon Restrictions for AD Users (Log On To) http://woshub.com/restrict-workstation-logon-ad-users/ PaW
 Estaciones de trabajo de acceso con privilegios https://docs.microsoft.com/es-es/windows-server/identity/securing-privileged-access/privileged-access-workstations MakeMeAdmin MakeMeAdmin Homepage https://makemeadmin.com/ MakeMeAdmin — temporary admin for your Limited User account https://blogs.msdn.microsoft.com/aaron_margosis/2004/07/24/makemeadmin-temporary-admin-for-your-limited-user-account/ Jump boxes Use Windows Server 2016 to secure a jump server https://blogs.technet.microsoft.com/datacentersecurity/2017/02/02/use-windows-server-2016-to-secure-a-jump-server/ KRBTGT Kerberos & KRBTGT: Active Directory’s Domain Kerberos Service Account https://adsecurity.org/?p=483 KRBTGT Account Password Reset Scripts now available for customers https://www.microsoft.com/security/blog/2015/02/11/krbtgt-account-password-reset-scripts-now-available-for-customers/ Recuperación de bosque de AD: restablecimiento de la contraseña de krbtgt https://docs.microsoft.com/es-es/windows-server/identity/ad-ds/manage/ad-forest-recovery-resetting-the-krbtgt-password SMB1/LM/NTLM
