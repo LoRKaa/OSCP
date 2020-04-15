@@ -28,6 +28,8 @@
 [OSCP BIBLE](https://github.com/mohitkhemchandani/OSCP_BIBLE)
 <br>
 [s4vitar](https://gist.github.com/s4vitar/b88fefd5d9fbbdcc5f30729f7e06826e)
+<br>
+[One Page Repository](https://infosecsanyam261.gitbook.io/tryharder/one-page-methodology)
 
 ## Tools
 [sshuttle - Tunel SSH que funciona como una VPN](https://github.com/sshuttle/sshuttle)
