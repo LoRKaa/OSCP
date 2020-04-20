@@ -3,7 +3,7 @@
 </p>
 
 # OSCP
-> Preparacion del OSCP 2019
+> Preparacion del OSCP 2020
 
 ## Lab
 [KaliOSCP](https://images.offensive-security.com/pwk-kali-vm.7z)
