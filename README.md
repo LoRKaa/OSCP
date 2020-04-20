@@ -30,6 +30,8 @@
 [s4vitar](https://gist.github.com/s4vitar/b88fefd5d9fbbdcc5f30729f7e06826e)
 <br>
 [One Page Repository](https://infosecsanyam261.gitbook.io/tryharder/one-page-methodology)
+<br>
+[Total OSCP Guide](https://sushant747.gitbooks.io/total-oscp-guide/)
 
 ## Tools
 [sshuttle - Tunel SSH que funciona como una VPN](https://github.com/sshuttle/sshuttle)
