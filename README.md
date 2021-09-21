@@ -2,8 +2,7 @@
 <a href="https://www.offensive-security.com/information-security-certifications/oscp-offensive-security-certified-professional/"><img src="img/logo.png" title="OSCP" alt="OSCP"></a>
 </p>
 
-# OSCP
-> Preparacion del OSCP 2020
+# OSCP PREPARATION 2021-2022
 
 ## Lab
 [KaliOSCP](https://images.offensive-security.com/pwk-kali-vm.7z)
