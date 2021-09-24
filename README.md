@@ -7,8 +7,6 @@
 ## Lab
 [KaliOSCP](https://images.offensive-security.com/pwk-kali-vm.7z)
 <br>
-[WindowsXP](https://mega.nz/#!rdsE1ISL!NHk26-tE6iOu-0DkjRbfz1h0Xp79nq4daHYDvXxAcZ0)
-<br>
 [Windows 10 vm](https://developer.microsoft.com/es-es/windows/downloads/virtual-machines)
 <br>
 [Windows Server Eval Center](https://www.microsoft.com/es-xl/evalcenter/evaluate-windows-server-2019)
