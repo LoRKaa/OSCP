@@ -13,13 +13,21 @@
 
 ## Experiencias
 [yan1x0s](https://yan1x0s.medium.com/hack-your-oscp-certification-ba29317c72ff)
+<br>
 [Olga Mosicheva](https://owlga.medium.com/my-oscp-experience-straighten-up-and-fly-right-8dd0b00c76fa)
+<br>
 [Infosec](https://infosecwriteups.com/how-i-passed-oscp-with-100-points-in-12-hours-without-metasploit-in-my-first-attempt-dc8d03366f33)
+<br>
 [Shubham Khichi](https://medium.com/@shubhamkhichi5/how-to-practice-and-pass-oscp-from-scratch-a06ef4b5d28a)
+<br>
 [M4p0-D0ufu](https://medium.com/@yuzhezhangwork/oscp-i-did-it-ec91d78644d7)
+<br>
 [sif0](https://sif0.medium.com/my-journey-to-being-an-oscp-70f8c1b2fab0)
+<br>
 [Anyrud3](https://medium.com/@anyrud3/my-oscp-journey-and-mistakes-2-failed-oscp-attempts-and-finally-passed-in-3rd-6fc870a7209a)
+<br>
 [Daniel Houghton](https://medium.com/@1chidan/zero-to-oscp-concise-edition-b5ecd4a781c3)
+<br>
 [Dark Roast Security](https://medium.com/dark-roast-security/my-path-to-attaining-oscp-e6233243d1db)
 
 ## Guias
