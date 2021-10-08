@@ -12,6 +12,8 @@
 [Windows Server Eval Center](https://www.microsoft.com/es-xl/evalcenter/evaluate-windows-server-2019)
 
 ## Experiencias
+[Kartik Sharma](https://98kartik-sharma.medium.com/pwk-oscp-pen-200-review-2021-b4237134d665)
+<br>
 [yan1x0s](https://yan1x0s.medium.com/hack-your-oscp-certification-ba29317c72ff)
 <br>
 [Olga Mosicheva](https://owlga.medium.com/my-oscp-experience-straighten-up-and-fly-right-8dd0b00c76fa)
